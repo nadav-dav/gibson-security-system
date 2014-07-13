@@ -1,0 +1,55 @@
+{>"layouts/master" /}
+{<title}Login{/title}
+
+{<body}
+    {>"partials/hero"/}
+    <div class="row vcenter">
+        <div class="col-sm-4 col-sm-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"> <strong class="">Sign in</strong></div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="login" class="col-sm-3 control-label">Login</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="login" placeholder="Login" required="" type="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label">Password</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="inputPassword3" placeholder="Password" required="" type="password">
+                            </div>
+                        </div>
+                        <div class="form-group last">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-success btn-sm">Sign in</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+					New user? <a href="/register">Register!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{/body}
+
+<style type="text/css">
+	.panel-default {
+		opacity: 0.9;
+		margin-top:30px;
+	}
+	.form-group.last {
+		margin-bottom:0px;
+	}
+	div.panel-body {
+		background-color: rgba(255, 255, 255, 1)
+	}
+	.vcenter {
+		position: absolute;
+		top: calc(50% - 250px);
+		width: 100%;
+	}
+</style>

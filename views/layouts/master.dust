@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="/components/bootstrap/dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="/components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <style type="text/css">
+		body {
+			background-image: url(/img/background.jpg); 
+			background-attachment: fixed; 
+			background-position: 50% 50%;
+		}
+    </style>
+    <title>{+title /}</title>
+    {+styles /}
+    {+scripts /}
+</head>
+<body>
+<div id="container">
+    {+body /}
+</div>
+<script src="/js/app.js"></script>
+</body>
+</html>

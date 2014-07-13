@@ -1,0 +1,33 @@
+<div class="row text-center headline">
+    <div class="small-headline">
+        Welcome to Wix's:
+     </div>
+    <div class="big-headline">
+        Bullet Proof Security
+     </div>
+</div>
+
+<style type="text/css">
+    .headline {
+        margin-top: 40px;
+    }
+    .headline .big-headline {
+        font-family: times, Times New Roman, times-roman, georgia, serif;
+        color: white;
+        margin: 0;
+        padding: 0px 0px 6px 0px;
+        font-size: 51px;
+        line-height: 44px;
+        letter-spacing: -2px;
+        font-weight: bold;
+    }
+    .headline .small-headline {
+        font-family: Gill Sans, Verdana;
+        color: white;
+        font-size: 11px;
+        line-height: 14px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: bold;
+    }
+</style>

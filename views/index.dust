@@ -1,0 +1,9 @@
+{>"layouts/master" /}
+
+{<title}
+    {@pre type="content" key="system_name"/}
+{/title}
+
+{<body}
+
+{/body}
