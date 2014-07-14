@@ -25,27 +25,19 @@ describe('Availability Test', function () {
         mock.close(done);
     });
 
+    var entries = [
+        '/',
+        '/login',
+        '/register',
+        '/wall'
+    ];
 
-    it('/', function (done) {
-        request(mock)
-            .get('/')
-            .expect(200)
-            .expect('Content-Type', /html/)
-            .end(done);
+    entries.forEach(function(uri){
+        it(uri, function (done) {
+            request(mock)
+                .get(uri)
+                .expect(200)
+                .end(done)
+        });
     });
-
-    it("/login", function (done) {
-        request(mock)
-            .get("/login")
-            .expect(200)
-            .end(done)
-    });
-
-    it("/register", function (done) {
-        request(mock)
-            .get("/register")
-            .expect(200)
-            .end(done)
-    });
-
 });

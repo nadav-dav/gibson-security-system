@@ -1,0 +1,18 @@
+<article class="timeline-entry input">                    
+    <div class="timeline-entry-inner">
+        <div class="timeline-icon bg-success">
+            <i class="entypo-feather"></i>
+        </div>                        
+        <div class="timeline-label">
+            <form role="form">
+                <div class="form-group">
+                    <textarea placeholder="Whats on your mind?" class="form-control" rows="3"></textarea> 
+                </div>
+                <div> 
+                    <button type="submit" class="btn btn-primary">Post</button>
+                    <span> posted a status update</span>
+                </div>
+            </form>                                        
+        </div>
+    </div>                    
+</article>

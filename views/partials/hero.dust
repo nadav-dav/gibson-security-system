@@ -1,17 +1,25 @@
-<div class="row text-center headline">
+<div class="row text-center hero">
     <div class="small-headline">
         Welcome to Wix's:
      </div>
     <div class="big-headline">
-        Bullet Proof Security
+        Gibson Server
      </div>
 </div>
 
+<script type="text/javascript">
+    $(function(){
+        $(".hero")
+            .animate({ "opacity":0    }, 1)
+            .animate({ "opacity":0.9  }, 1000)
+    })
+</script>
+
 <style type="text/css">
-    .headline {
+    .hero {
         margin-top: 40px;
     }
-    .headline .big-headline {
+    .hero .big-headline {
         font-family: times, Times New Roman, times-roman, georgia, serif;
         color: white;
         margin: 0;
@@ -21,7 +29,7 @@
         letter-spacing: -2px;
         font-weight: bold;
     }
-    .headline .small-headline {
+    .hero .small-headline {
         font-family: Gill Sans, Verdana;
         color: white;
         font-size: 11px;
