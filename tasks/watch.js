@@ -9,6 +9,7 @@ module.exports = function watch(grunt) {
     return {
         watch: {
             files: [
+                'src/**/*.js',
                 'test/**/*.js',
                 'controllers/**/*.js',
                 'models/**/*.js',

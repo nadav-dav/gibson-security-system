@@ -12,10 +12,10 @@ var UsersDao = (function () {
         var db = this.db;
         return new Promise(function (resolve, reject) {
             db.prepare("CREATE TABLE IF NOT EXISTS users (" +
-                    "id varchar(40) PRIMARY KEY, " +
-                    "name varchar(100), " +
-                    "password varchar(100), " +
-                    "dateCreated BIGINT" +
+                    "id varchar(40) PRIMARY KEY NOT NULL, " +
+                    "name varchar(100) NOT NULL, " +
+                    "password varchar(100) NOT NULL, " +
+                    "dateCreated BIGINT NOT NULL" +
                     ");")
                 .run()
                 .finalize(function (err) {
