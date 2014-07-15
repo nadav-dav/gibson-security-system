@@ -12,7 +12,9 @@
             "renderer": {
                 "method": "js",
                 "arguments": [
-                    { "cache": true },
+                    {
+                        "cache": true
+                    },
                     {
                         "views": "config:express.views",
                         "view engine": "config:express.view engine",
@@ -23,14 +25,11 @@
             }
         }
     },
-    
 
     "i18n": {
         "contentPath": "path:./locales",
         "fallback": "en-US"
     },
-    
-    
 
     "middleware": {
 
@@ -42,11 +41,10 @@
 
         "router": {
             "module": {
-                "arguments": [{ "directory": "path:./controllers" }]
+                "arguments": [{"directory": "path:./controllers"}]
             }
         },
 
-        
         "expressView": {
             "priority": 100,
             "enabled": true,
@@ -54,7 +52,6 @@
                 "name": "engine-munger/lib/expressView"
             }
         },
-        
 
         "fileNotFound": {
             "enabled": true,
@@ -72,7 +69,21 @@
                 "name": "kraken-js/middleware/500",
                 "arguments": [ "errors/500" ]
             }
-        }
+        },
 
+        "appsec": {
+            "priority": 110,
+            "module": {
+                "name": "lusca",
+                "arguments": [
+                    {
+                        "csrf": false,
+                        "xframe": false,
+                        "p3p": false,
+                        "csp": false
+                    }
+                ]
+            }
+        }
     }
 }

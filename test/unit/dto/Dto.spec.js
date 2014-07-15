@@ -10,6 +10,14 @@ describe("Dto", function () {
         };
     });
 
+    it("should generate new Dto's", function () {
+        Dto.generate(fields, Person);
+
+        var person = Person.create({fname: 'foo', lname: 'bar'});
+        expect(person.fname).toBe('foo');
+        expect(person.lname).toBe('bar');
+    });
+
     it("should not allow to create a Dto without a name", function () {
         var MyClass = function () {};
         expect(function () {
@@ -20,14 +28,6 @@ describe("Dto", function () {
         expect(function () {
             Dto.generate(fields, MyClass);
         }).toNotThrow()
-    });
-
-    it("should generate new Dto's", function () {
-        Dto.generate(fields, Person);
-
-        var person = Person.create({fname: 'foo', lname: 'bar'});
-        expect(person.fname).toBe('foo');
-        expect(person.lname).toEqual('bar')
     });
 
     it("should validate all fields are populated", function () {

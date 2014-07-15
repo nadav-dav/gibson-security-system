@@ -9,4 +9,16 @@ module.exports = function (router) {
         res.render('index', model);        
     });
 
+    router.get('/register', function (req, res) {
+        res.render('register');
+    });
+
+    router.get('/login', function (req, res) {
+        res.render('login');
+    });
+
+    router.get('/wall', function (req, res) {
+        res.render('wall');
+    });
+
 };

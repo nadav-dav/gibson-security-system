@@ -11,7 +11,6 @@ var kraken = require('kraken-js'),
     },
     port = process.env.PORT || 8000;
 
-app.locals.pretty = true;
 app.use(kraken(options));
 
 

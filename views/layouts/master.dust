@@ -10,6 +10,7 @@
 			background-image: url(/img/background.jpg); 
 			background-attachment: fixed; 
 			background-position: 50% 50%;
+            overflow-x: hidden;
 		}
     </style>
     <title>{+title /}</title>

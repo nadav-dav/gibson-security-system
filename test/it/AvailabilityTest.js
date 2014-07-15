@@ -3,22 +3,16 @@
 'use strict';
 
 
-var kraken = require('kraken-js'),
-    express = require('express'),
-    request = require('supertest');
+var request = require('supertest');
+var rek = require("rekuire");
 
 
 describe('Availability Test', function () {
 
-    var app, mock;
+    var mock;
 
     beforeEach(function (done) {
-        app = express();
-        app.on('start', done);
-        app.use(kraken({
-            basedir: process.cwd()
-        }));
-        mock = app.listen(1337);
+        mock = rek('GibsonServer').create(done);
     });
 
     afterEach(function (done) {

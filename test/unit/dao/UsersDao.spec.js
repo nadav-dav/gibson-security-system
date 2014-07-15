@@ -2,14 +2,13 @@ var rek = require("rekuire");
 var expect = require('expect');
 var User = rek("User");
 var UsersDao = rek("UsersDao");
-var sqlite3 = require('sqlite3').verbose();
 var guid = require('guid');
 
 describe("UsersDao", function () {
     var db, userDao, user;
 
     beforeEach(function (done) {
-        db = new sqlite3.Database(':memory:');
+        db = rek("InMemoryDb").create();
         userDao = new UsersDao(db);
         userDao.createTableIfNotExists()
             .then(done)
