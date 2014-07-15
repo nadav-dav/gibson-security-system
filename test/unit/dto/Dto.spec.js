@@ -78,4 +78,11 @@ describe("Dto", function () {
         expect(personCopy.fname).toBe('foo');
         expect(personCopy.lname).toBe('baz');
     });
+
+    it("should have toString that does not show the '__private' objects", function () {
+        Dto.generate(fields, Person);
+        var person = Person.create({fname: 'foo', lname: 'bar'});
+        var personString = person.toString();
+        expect(personString.indexOf("__privates")).toBe(-1);
+    });
 });

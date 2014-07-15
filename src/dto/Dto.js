@@ -44,6 +44,10 @@ var Dto = (function () {
             });
             return cls.create(data);
         };
+
+        cls.prototype.toString = function(){
+            return JSON.stringify(this.__privates);
+        };
     };
 
 
