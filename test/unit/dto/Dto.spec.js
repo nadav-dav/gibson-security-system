@@ -6,7 +6,7 @@ describe("Dto", function () {
     var fields, Person;
     beforeEach(function () {
         fields = ['fname', 'lname'];
-        Person = function () {
+        Person = function Person () {
         };
     });
 
@@ -30,7 +30,7 @@ describe("Dto", function () {
 
         var person = Person.create({fname: 'foo', lname: null});
         expect(person.fname).toBe('foo');
-        expect(person.lname).toEqual(null);
+        expect(person.lname).toBe(null);
     });
 
     it("should allow for default values creation", function () {
@@ -49,5 +49,21 @@ describe("Dto", function () {
         var person3 = Person.create({fname: 'foo', lname: 'baz'});
         expect(Person.areEqual(person1, person2)).toBe(true);
         expect(Person.areEqual(person1, person3)).toBe(false);
+    });
+
+    it("should make the dto immutable", function () {
+        Dto.generate(fields, Person);
+        var person = Person.create({fname: 'foo', lname: 'bar'});
+        person.fname = 'not foo';
+        expect(person.fname).toBe('foo');
+    });
+
+    it("should have a copy method", function () {
+        Dto.generate(fields, Person);
+        var person = Person.create({fname: 'foo', lname: 'bar'});
+        var personCopy = Person.copy(person, {lname:'baz'});
+
+        expect(personCopy.fname).toBe('foo');
+        expect(personCopy.lname).toBe('baz');
     });
 });

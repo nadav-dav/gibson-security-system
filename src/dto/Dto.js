@@ -1,6 +1,5 @@
 var Dto = (function () {
-    function Dto() {
-    }
+    function Dto() {}
 
     Dto.generate = function (fields, cls, defs) {
         var addDefaults = defs || function (a) {
@@ -12,17 +11,10 @@ var Dto = (function () {
                 instance[fieldName] = data[fieldName];
             });
             addDefaults(instance);
-            cls.validate(instance);
+            Dto.validate (fields, cls, instance);
+            Dto.makeImmutable (fields, instance);
 
             return instance;
-        };
-
-        cls.validate = function (instance) {
-            fields.forEach(function (fieldName) {
-                if (instance[fieldName] === undefined) {
-                    throw new Error("Failed to create " + cls.name + " object, missing [" + fieldName + "]");
-                }
-            });
         };
 
         cls.areEqual = function(a, b){
@@ -34,6 +26,43 @@ var Dto = (function () {
             });
             return isEqual ;
         };
+
+        cls.copy = function(original, changes){
+            var data = {};
+            fields.forEach(function (fieldName) {
+                if (changes[fieldName] !== undefined) {
+                    data[fieldName] = changes[fieldName];
+                } else {
+                    data[fieldName] = original[fieldName];
+                }
+            });
+            return cls.create(data);
+        };
+    };
+
+
+
+
+
+    Dto.validate = function (fields, cls, instance) {
+        fields.forEach(function (fieldName) {
+            if (instance[fieldName] === undefined) {
+                throw new Error("Failed to create a '" + cls.name + "' object, missing [" + fieldName + "]");
+            }
+        });
+    };
+
+    Dto.makeImmutable = function(fields, instance) {
+        instance.__privates = {};
+        fields.forEach(function (fieldName) {
+            instance.__privates[fieldName] = instance[fieldName];
+            instance.__defineGetter__(fieldName, function(){
+                return instance.__privates[fieldName];
+            });
+            instance.__defineSetter__("fieldName", function(val){
+                //do nothing
+            });
+        });
     };
 
     return Dto;
