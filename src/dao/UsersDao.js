@@ -11,33 +11,30 @@ var UsersDao = (function () {
     UsersDao.prototype.createTableIfNotExists = function () {
         var db = this.db;
         return new Promise(function (resolve, reject) {
-            db.prepare("CREATE TABLE IF NOT EXISTS users (" +
+            db.run("CREATE TABLE IF NOT EXISTS users (" +
                     "id varchar(40) PRIMARY KEY NOT NULL, " +
-                    "name varchar(100) NOT NULL, " +
+                    "name varchar(100) NOT NULL UNIQUE, " +
                     "password varchar(100) NOT NULL, " +
                     "dateCreated BIGINT NOT NULL" +
-                    ");")
-                .run()
-                .finalize(function (err) {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve();
-                    }
-                });
+                    ");", function(err){
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
         });
     };
 
     UsersDao.prototype.save = function (user) {
         var db = this.db;
         return new Promise(function (resolve, reject) {
-            db.prepare("INSERT INTO users VALUES (?, ?, ?, ?)")
-                .run(
+            db.run("INSERT INTO users VALUES (?, ?, ?, ?)",
                     user.id,
                     user.name,
                     user.password,
-                    user.dateCreated
-                ).finalize(function (err) {
+                    user.dateCreated,
+                function (err) {
                     if (err) {
                         reject(err);
                     } else {
@@ -50,11 +47,12 @@ var UsersDao = (function () {
         var db = this.db;
         return new Promise(function (resolve, reject) {
             var user;
-            db.prepare(
+            db.get(
                 "SELECT id, name, password, dateCreated " +
-                "FROM users " +
-                "WHERE id = ?")
-                .get(userId, function (err, row) {
+                    "FROM users " +
+                    "WHERE id = ?",
+                userId,
+                function (err, row) {
                     if (err) {
                         reject(err)
                     } else {
