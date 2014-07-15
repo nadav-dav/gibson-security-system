@@ -13,7 +13,7 @@ describe("UsersDao", function () {
         userDao = new UsersDao(db);
         userDao.createTableIfNotExists()
             .then(done)
-            .fin(done);
+            .catch(done);
         user = User.create({id: guid.raw(), name: "Foo Bar", password: "mypass"});
     });
 
@@ -25,8 +25,20 @@ describe("UsersDao", function () {
             .then(function (retrievedUser) {
                 expect(User.areEqual(user, retrievedUser)).toBe(true);
             })
-            .fin(done)
+            .then(done)
+            .catch(done)
+    });
 
+    it("should get a user by its name and password", function (done) {
+        userDao.save(user)
+            .then(function () {
+                return userDao.getUserByNameAndPassword(user.name, user.password);
+            })
+            .then(function (retrievedUser) {
+                expect(User.areEqual(user, retrievedUser)).toBe(true);
+            })
+            .then(done)
+            .catch(done)
     });
 
     it("should not allow two users with the same name", function (done) {

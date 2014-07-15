@@ -12,11 +12,11 @@ var UsersDao = (function () {
         var db = this.db;
         return new Promise(function (resolve, reject) {
             db.run("CREATE TABLE IF NOT EXISTS users (" +
-                    "id varchar(40) PRIMARY KEY NOT NULL, " +
-                    "name varchar(100) NOT NULL UNIQUE, " +
-                    "password varchar(100) NOT NULL, " +
-                    "dateCreated BIGINT NOT NULL" +
-                    ");", function(err){
+                "id varchar(40) PRIMARY KEY NOT NULL, " +
+                "name varchar(100) NOT NULL UNIQUE, " +
+                "password varchar(100) NOT NULL, " +
+                "dateCreated BIGINT NOT NULL" +
+                ");", function (err) {
                 if (err) {
                     reject(err);
                 } else {
@@ -30,10 +30,10 @@ var UsersDao = (function () {
         var db = this.db;
         return new Promise(function (resolve, reject) {
             db.run("INSERT INTO users VALUES (?, ?, ?, ?)",
-                    user.id,
-                    user.name,
-                    user.password,
-                    user.dateCreated,
+                user.id,
+                user.name,
+                user.password,
+                user.dateCreated,
                 function (err) {
                     if (err) {
                         reject(err);
@@ -59,13 +59,35 @@ var UsersDao = (function () {
                         try {
                             user = User.create(row);
                             resolve(user);
-                        } catch (e){
+                        } catch (e) {
                             reject(e);
                         }
                     }
                 });
         });
+    };
 
+    UsersDao.prototype.getUserByNameAndPassword = function (name, password) {
+        var db = this.db;
+        return new Promise(function (resolve, reject) {
+            db.get(
+                "SELECT id, name, password, dateCreated " +
+                    "FROM users " +
+                    "WHERE name = '" + name + "' AND" +
+                    "      password = '" + password + "'",
+                function (err, row) {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        try {
+                            var user = User.create(row);
+                            resolve(user);
+                        } catch (e) {
+                            reject(e);
+                        }
+                    }
+                });
+        });
     };
 
     return UsersDao;
