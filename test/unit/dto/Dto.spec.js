@@ -6,8 +6,20 @@ describe("Dto", function () {
     var fields, Person;
     beforeEach(function () {
         fields = ['fname', 'lname'];
-        Person = function Person () {
+        Person = function Person() {
         };
+    });
+
+    it("should not allow to create a Dto without a name", function () {
+        var MyClass = function () {};
+        expect(function () {
+            Dto.generate(fields, MyClass);
+        }).toThrow()
+
+        MyClass = function MyClass () {};
+        expect(function () {
+            Dto.generate(fields, MyClass);
+        }).toNotThrow()
     });
 
     it("should generate new Dto's", function () {
@@ -61,7 +73,7 @@ describe("Dto", function () {
     it("should have a copy method", function () {
         Dto.generate(fields, Person);
         var person = Person.create({fname: 'foo', lname: 'bar'});
-        var personCopy = Person.copy(person, {lname:'baz'});
+        var personCopy = Person.copy(person, {lname: 'baz'});
 
         expect(personCopy.fname).toBe('foo');
         expect(personCopy.lname).toBe('baz');
