@@ -6,7 +6,7 @@ var IndexModel = require('../models/index');
 module.exports = function (router) {
     var model = new IndexModel();
     router.get('/', function (req, res) {
-        res.render('index', model);        
+        res.redirect(302, '/login');
     });
 
     router.get('/register', function (req, res) {
