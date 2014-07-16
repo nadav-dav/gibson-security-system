@@ -1,9 +1,11 @@
 var rek = require("rekuire");
 var sqlite3 = require('sqlite3').verbose();
 var UsersDao = rek("UsersDao");
+var Session = rek("Session");
 
 module.exports = {
-    db: getDbBeans()
+    db: getDbBeans(),
+    session: getSession()
 };
 
 function isDevelopment(){
@@ -18,4 +20,8 @@ function getDbBeans(){
         datastore: dataStore,
         usersDao: usersDao
     }
+}
+
+function getSession (){
+    return new Session();
 }

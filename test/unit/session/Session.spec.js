@@ -1,14 +1,14 @@
 var rek = require("rekuire");
 var Session = rek("Session");
-var User = rek("User");
 var expect = rek("expect");
+var build = rek("Builders");
 
 describe("Session", function () {
     var session, user;
 
     beforeEach(function () {
         session = new Session();
-        user = User.create({name: "User", password: "Password"});
+        user = build.aUser();
     });
 
     it("should allow to log users in and get a session", function () {
@@ -38,8 +38,8 @@ describe("Session", function () {
     });
 
     it("should be able to support more than one user", function () {
-        var user1 = User.create({name: "User1", password: "Password"});
-        var user2 = User.create({name: "User2", password: "Password"});
+        var user1 = build.aUser({name: "User1"});
+        var user2 = build.aUser({name: "User2"});
         var sessionId1 = session.loginUser(user1);
         var sessionId2 = session.loginUser(user2);
 
@@ -60,4 +60,18 @@ describe("Session", function () {
 
         expect(firstSessionId).toNotEqual(secondSessionId);
     });
+
+    it("should allow to login with request object", function () {
+        var sessionId = session.loginUser(user);
+        var req = mockRequestWithSession(sessionId);
+        var sessionFromId       = session.sessionOf(sessionId);
+        var sessionFromRequest  = session.sessionOf(req);
+
+        expect(sessionFromRequest).toBe(sessionFromId);
+    });
+
+
+    function mockRequestWithSession(session){
+        return { cookies: {_gib_session:session}};
+    }
 });

@@ -25,9 +25,6 @@ describe('Availability Test', function () {
         server
             .get("/")
             .expect(302)
-            .expect(function(res){
-                expect(res.header['location']).toBe("/login")
-            })
             .end(done)
 
     });
@@ -49,7 +46,7 @@ describe('Availability Test', function () {
     it("open /wall", function (done) {
         server
             .get("/wall")
-            .expect(200)
+            .expect(302)
             .end(done)
     });
 });

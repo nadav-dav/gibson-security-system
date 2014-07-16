@@ -13,11 +13,22 @@ var Session = (function () {
         return sessionId;
     };
 
-    Session.prototype.sessionOf = function (sessionId) {
+    Session.prototype.sessionOf = function (arg1) {
+        var sessionId
+        if (typeof arg1 === "string") {
+            sessionId = arg1;
+        } else {
+            var request = arg1;
+            try {
+                sessionId = request.cookies["_gib_session"];
+            } catch (e) {
+
+            }
+        }
         return loggedUsers[sessionId];
     };
 
-    Session.prototype.logout = function (sessionId){
+    Session.prototype.logout = function (sessionId) {
         delete loggedUsers[sessionId];
     };
 

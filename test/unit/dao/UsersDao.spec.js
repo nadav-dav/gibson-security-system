@@ -1,8 +1,8 @@
 var rek = require("rekuire");
-var expect = require('expect');
-var User = rek("User");
+var expect = rek("expect");
 var UsersDao = rek("UsersDao");
-var guid = require('guid');
+var guid = rek("guid");
+var build = rek("Builders");
 
 describe("UsersDao", function () {
     var db, userDao, user;
@@ -13,7 +13,7 @@ describe("UsersDao", function () {
         userDao.createTableIfNotExists()
             .then(done)
             .catch(done);
-        user = User.create({id: guid.raw(), name: "Foo Bar", password: "mypass"});
+        user = build.aUser();
     });
 
     it("should add and retrieve users", function (done) {
@@ -54,8 +54,8 @@ describe("UsersDao", function () {
     });
 
     it("should not allow two users to have the same name", function (done) {
-        var user1 = User.create({id: guid.raw(), name: "Foo Bar", password: "mypass"});
-        var user2 = User.create({id: guid.raw(), name: "Foo Bar", password: "otherpass"});
+        var user1 = build.aUser({password: "mypass"});
+        var user2 = build.aUser({password: "not mypass"});
 
         userDao.save(user1)
             .then(function () {

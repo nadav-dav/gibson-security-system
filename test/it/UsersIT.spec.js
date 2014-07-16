@@ -19,7 +19,6 @@ describe('Users IT', function () {
             .then(register)
             .then(attemptLoginAndSucceed)
             .then(done).catch(done);
-
     });
 
     /* -------------------------------------- */
