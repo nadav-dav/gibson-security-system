@@ -7,7 +7,7 @@ module.exports = {
 };
 
 function isDevelopment(){
-    return process.env.NODE_ENV === "production"
+    return process.env.NODE_ENV !== "production"
 }
 
 function getDbBeans(){
