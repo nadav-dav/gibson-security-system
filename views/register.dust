@@ -1,5 +1,5 @@
 {>"layouts/master" /}
-{<title}Login{/title}
+{<title}Register{/title}
 
 {<body}
     {>"partials/hero"/}
@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group last">
                             <div class="col-sm-offset-3 col-sm-9">
-                                <button id="submit" type="submit" class="disabled btn btn-success btn-sm">Register</button>
+                                <button id="submit" type="submit" class="disabled btn btn-sm">Register</button>
                             </div>
                         </div>
                     </form>
@@ -70,8 +70,10 @@
         function inputChanged () {
             if ((usernameInput.val().length >= 4) && (passwordInput.val().length >= 4)) {
                 submitBtn.removeClass('disabled');
+                submitBtn.addClass('btn-success');
             } else {
                 submitBtn.addClass('disabled');
+                submitBtn.removeClass('btn-success');
             }
         }
 
