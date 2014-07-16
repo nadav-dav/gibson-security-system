@@ -11,17 +11,14 @@
             "module": "engine-munger",
             "renderer": {
                 "method": "js",
-                "arguments": [
-                    {
-                        "cache": true
-                    },
-                    {
-                        "views": "config:express.views",
-                        "view engine": "config:express.view engine",
-                        "specialization": "config:specialization",
-                        "i18n": "config:i18n"
-                    }
-                ]
+                "arguments": [{
+                    "cache": true
+                }, {
+                    "views": "config:express.views",
+                    "view engine": "config:express.view engine",
+                    "specialization": "config:specialization",
+                    "i18n": "config:i18n"
+                }]
             }
         }
     },
@@ -35,13 +32,15 @@
 
         "static": {
             "module": {
-                "arguments": [ "path:./.build" ]
+                "arguments": ["path:./.build"]
             }
         },
 
         "router": {
             "module": {
-                "arguments": [{"directory": "path:./controllers"}]
+                "arguments": [{
+                    "directory": "path:./controllers"
+                }]
             }
         },
 
@@ -58,7 +57,7 @@
             "priority": 130,
             "module": {
                 "name": "kraken-js/middleware/404",
-                "arguments": [ "errors/404" ]
+                "arguments": ["errors/404"]
             }
         },
 
@@ -67,7 +66,7 @@
             "priority": 140,
             "module": {
                 "name": "kraken-js/middleware/500",
-                "arguments": [ "errors/500" ]
+                "arguments": ["errors/500"]
             }
         },
 
@@ -75,15 +74,17 @@
             "priority": 110,
             "module": {
                 "name": "lusca",
-                "arguments": [
-                    {
-                        "csrf": false,
-                        "xframe": false,
-                        "p3p": false,
-                        "csp": false
-                    }
-                ]
+                "arguments": [{
+                    "csrf": false,
+                    "xframe": false,
+                    "p3p": false,
+                    "csp": false
+                }]
             }
+        },
+
+        "session": {
+            "enabled": false
         }
     }
 }
