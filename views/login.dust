@@ -10,9 +10,9 @@
                 <div class="panel-body">
                     <form id="login" class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label for="email" class="col-sm-3 control-label">Email</label>
+                            <label for="name" class="col-sm-3 control-label">Username</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="email" placeholder="Email" required="" type="email">
+                                <input class="form-control input" id="username" placeholder="Username" required="" type="name">
                             </div>
                         </div>
                         <div class="form-group">
@@ -24,13 +24,13 @@
                         <div class="form-group error">
                             <div class="col-sm-9 col-sm-offset-3">
                                 <hr/>
-                                <p class="text-danger">Error</p>
+                                <p class="errorText text-danger">Error</p>
                                 <hr/>
                             </div>
                         </div>
                         <div class="form-group last">
                             <div class="col-sm-offset-3 col-sm-9">
-                                <button id="submit" type="submit" class="btn btn-success btn-sm" onclick="return false;">Sign in</button>
+                                <button id="submit" type="submit" class="btn btn-success btn-sm disabled" onclick="return false;">Sign in</button>
                             </div>
                         </div>
                     </form>
@@ -61,17 +61,41 @@
 
 <script type="text/javascript">
     $(function(){
+        var usernameInput   = $("form#login input#username");
+        var passwordInput   = $("form#login input#password");
+        var submitBtn       = $("form#login button#submit");
+        var errorBox       = $("form#login .error");
+        var errorText       = $("form#login .error .errorText");
+
+        submitBtn.click(submit);
+        usernameInput.keyup(inputChanged);
+        passwordInput.keyup(inputChanged);
+
+        function submit () {
+            
+            $.post( "/services/login", {name: usernameInput.val(), password: passwordInput.val()})
+            .done(function() {
+                window.location = "/wall";
+            })
+            .fail(function(res) {
+                errorBox.show();
+                errorText.text(res.responseText);
+            });
+
+            return false;
+        }
+
+        function inputChanged () {
+            if ((usernameInput.val().length >= 4) && (passwordInput.val().length >= 4)) {
+                submitBtn.removeClass('disabled');
+            } else {
+                submitBtn.addClass('disabled');
+            }
+        }
+
         $(".panel")
             .animate({ "opacity":0, "margin-top": "+=20" }, 1)
             .animate({ "opacity":0.9, "margin-top": "-=20" }, 500);
-
-        $("form#login button#submit").click(submit);
-
-        function submit () {
-            var email = $("form#login input#email").val();
-            var password = $("form#login input#password").val();
-            alert(email + " " + password);
-        }
     })
 </script>
 

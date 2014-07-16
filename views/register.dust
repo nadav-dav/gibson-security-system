@@ -9,22 +9,29 @@
                 <div class="panel-heading"> <strong class="">Register</strong>
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form">
+                    <form id="register" class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label for="login" class="col-sm-3 control-label">Login</label>
+                            <label for="username" class="col-sm-3 control-label">Username</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="login" placeholder="Login" required="" type="email">
+                                <input class="form-control" id="username" placeholder="Username" required="" type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-3 control-label">Password</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="inputPassword3" placeholder="Password" required="" type="password">
+                                <input class="form-control" id="password" placeholder="Password" required="" type="password">
+                            </div>
+                        </div>
+                        <div class="form-group error">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <hr/>
+                                <p class="errorText text-danger">Error</p>
+                                <hr/>
                             </div>
                         </div>
                         <div class="form-group last">
                             <div class="col-sm-offset-3 col-sm-9">
-                                <button type="submit" class="btn btn-success btn-sm">Register</button>
+                                <button id="submit" type="submit" class="disabled btn btn-success btn-sm">Register</button>
                             </div>
                         </div>
                     </form>
@@ -37,9 +44,40 @@
 
 <script type="text/javascript">
     $(function(){
+        var usernameInput   = $("form#register input#username");
+        var passwordInput   = $("form#register input#password");
+        var submitBtn       = $("form#register button#submit");
+        var errorBox       = $("form#register .error");
+        var errorText       = $("form#register .error .errorText");
+
+        submitBtn.click(submit);
+        usernameInput.keyup(inputChanged);
+        passwordInput.keyup(inputChanged);
+
+        function submit () {            
+            $.post( "/services/register", {name: usernameInput.val(), password: passwordInput.val()})
+            .done(function() {
+                window.location = "/wall"
+            })
+            .fail(function(res) {
+                errorBox.show();
+                errorText.text(res.responseText);
+            });
+            
+            return false;
+        }
+
+        function inputChanged () {
+            if ((usernameInput.val().length >= 4) && (passwordInput.val().length >= 4)) {
+                submitBtn.removeClass('disabled');
+            } else {
+                submitBtn.addClass('disabled');
+            }
+        }
+
         $(".panel")
             .animate({ "opacity":0, "margin-top": "+=20" }, 1)
-            .animate({ "opacity":0.9, "margin-top": "-=20" }, 500)
+            .animate({ "opacity":0.9, "margin-top": "-=20" }, 500);
     })
 </script>
 
@@ -55,5 +93,8 @@
 	div.panel-body {
 		background-color: rgba(255, 255, 255, 1)
 	}
+    .error {
+        display: none;
+    }
 </style>
 {/styles}
