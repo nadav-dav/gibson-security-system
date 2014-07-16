@@ -59,8 +59,9 @@ describe("Dto", function () {
         var person1 = Person.create({fname: 'foo', lname: 'bar'});
         var person2 = Person.create({fname: 'foo', lname: 'bar'});
         var person3 = Person.create({fname: 'foo', lname: 'baz'});
-        expect(Person.areEqual(person1, person2)).toBe(true);
-        expect(Person.areEqual(person1, person3)).toBe(false);
+
+        expect(person1).toEqual(person2);
+        expect(person1).toNotEqual(person3);
     });
 
     it("should make the dto immutable", function () {

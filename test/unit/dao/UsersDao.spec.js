@@ -22,7 +22,7 @@ describe("UsersDao", function () {
                 return userDao.getUserById(user.id);
             })
             .then(function (retrievedUser) {
-                expect(User.areEqual(user, retrievedUser)).toBe(true);
+                expect(user).toEqual(retrievedUser);
             })
             .then(done)
             .catch(done)
@@ -34,7 +34,7 @@ describe("UsersDao", function () {
                 return userDao.getUserByNameAndPassword(user.name, user.password);
             })
             .then(function (retrievedUser) {
-                expect(User.areEqual(user, retrievedUser)).toBe(true);
+                expect(user).toEqual(retrievedUser);
             })
             .then(done)
             .catch(done)

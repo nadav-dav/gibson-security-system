@@ -5,7 +5,7 @@ var Session = (function () {
     }
 
     Session.prototype.loginUser = function (user) {
-        var sessionId = "sessionId";
+        var sessionId = user.id;
         if (loggedUsers[sessionId] === undefined){
             loggedUsers[sessionId] = {};
         }
@@ -18,7 +18,7 @@ var Session = (function () {
     };
 
     Session.prototype.logout = function (sessionId){
-        delete loggedUsers.sessionId;
+        delete loggedUsers[sessionId];
     };
 
     return Session;
