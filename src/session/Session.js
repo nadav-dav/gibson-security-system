@@ -1,3 +1,5 @@
+var guid = require("guid");
+
 var Session = (function () {
     var loggedUsers = {};
 
@@ -5,10 +7,8 @@ var Session = (function () {
     }
 
     Session.prototype.loginUser = function (user) {
-        var sessionId = user.id;
-        if (loggedUsers[sessionId] === undefined){
-            loggedUsers[sessionId] = {};
-        }
+        var sessionId = guid.raw();
+        loggedUsers[sessionId] = {};
         loggedUsers[sessionId].user = user;
         return sessionId;
     };

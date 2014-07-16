@@ -27,7 +27,6 @@ describe("Session", function () {
         var sessionId = session.loginUser(user);
         session.sessionOf(sessionId)["foo"] = "bar";
 
-        sessionId = session.loginUser(user);
         expect(session.sessionOf(sessionId)["foo"]).toBe("bar");
     });
 
@@ -52,5 +51,13 @@ describe("Session", function () {
             (session.sessionOf(sessionId2).user)
             .toEqual(user2)
 
+    });
+
+    it("should create a different session after every login", function () {
+        var firstSessionId =    session.loginUser(user);
+                                session.logout(firstSessionId);
+        var secondSessionId =   session.loginUser(user);
+
+        expect(firstSessionId).toNotEqual(secondSessionId);
     });
 });
