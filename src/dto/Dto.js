@@ -24,6 +24,9 @@ var Dto = (function () {
         };
 
         cls.areEqual = function(a, b){
+            if (!!a !== !!b){
+                return false;
+            }
             var isEqual = true;
             fields.forEach(function (fieldName) {
                 if (a[fieldName] !== b[fieldName]) {
