@@ -1,5 +1,5 @@
-var guid = require('guid');
-var Promise = require('q').Promise;
+var guid = require("guid");
+var Promise = require("q").Promise;
 var rek = require("rekuire");
 var User = rek("User");
 
@@ -38,7 +38,7 @@ var UsersDao = (function () {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve();
+                        resolve(user);
                     }
                 });
         });

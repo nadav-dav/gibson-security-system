@@ -2,6 +2,7 @@
 
 var rek = require("rekuire");
 var usersDao = rek("beans").db.usersDao;
+var session = rek("beans").session;
 var User = rek("User");
 var q = rek("q");
 
@@ -10,6 +11,8 @@ module.exports = function (router) {
     router.post("/login", function (req, res) {
         usersDao.getUserByNameAndPassword(req.body.name, req.body.password)
             .then(function (user) {
+                var sessionId = session.loginUser(user);
+                res.cookie("_gib_session", sessionId, {});
                 res.send();
             })
             .catch(function (e) {
@@ -23,6 +26,10 @@ module.exports = function (router) {
         })
             .then(function (user) {
                 return usersDao.save(user);
+            })
+            .then(function(user){
+                var sessionId = session.loginUser(user);
+                res.cookie("_gib_session", sessionId, {});
             })
             .then(function () {
                 res.send();

@@ -13,7 +13,7 @@ describe('Availability Test', function () {
     var mock, server;
 
     beforeEach(function (done) {
-        mock = rek('GibsonServer').create(done);
+        mock = rek('TestServer').create(done);
         server = request(mock)
     });
 
