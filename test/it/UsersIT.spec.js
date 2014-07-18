@@ -44,6 +44,22 @@ describe('Users IT', function () {
         ], done);
     });
 
+    it("should redirect '/' to '/wall' page if already registered", function (done) {
+        server.run([
+            register(credentials),
+            goTo("/login"),
+            makeSure.hasTemporaryRedirectTo("/wall")
+        ], done);
+    });
+
+    it("should redirect '/' to '/wall' page if already registered", function (done) {
+        server.run([
+            register(credentials),
+            goTo("/register"),
+            makeSure.hasTemporaryRedirectTo("/wall")
+        ], done);
+    });
+
     /* -------------------------------------- */
 
     beforeEach(function (done) {
