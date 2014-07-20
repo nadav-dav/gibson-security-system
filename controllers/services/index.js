@@ -2,8 +2,10 @@
 
 var rek = require("rekuire");
 var usersDao = rek("beans").db.usersDao;
+var messagesDao = rek("beans").db.messagesDao;
 var expressSessionHelper = rek("beans").session.expressSessionHelper;
 var User = rek("User");
+var Message = rek("Message");
 var q = rek("q");
 
 module.exports = function (router) {
@@ -39,7 +41,43 @@ module.exports = function (router) {
     });
 
     router.post("/logout", function (req, res) {
-        expressSessionHelper.logout(req, res);
-        res.send();
+        onlyForLoggedInUsers(req, res, function(sessionData){
+            expressSessionHelper.logout(req, res);
+            res.send();
+        });
     });
+
+    router.post("/messages", function (req, res) {
+        onlyForLoggedInUsers(req, res, function(sessionData){
+            var msg = Message.create({author: sessionData.user.name , body:req.body.message});
+            messagesDao.post(msg).then(function(){
+                res.send();
+            }).catch(function(e){
+                res.status(500).send("Failed to post a message, Please try again later.");
+            });
+
+        });
+
+    });
+
+    router.get("/messages", function (req, res) {
+        onlyForLoggedInUsers(req, res, function(sessionData){
+            messagesDao.getMessages()
+                .then(function(messages){
+                    res.send("[" + messages.toString() + "]");
+                })
+                .catch(function(e){
+                    res.status(500).send("Failed to retrieve messages. "+ e);
+                });
+        });
+    });
+
+    function onlyForLoggedInUsers(req, res, fn){
+        var sessionData = expressSessionHelper.getSessionData(req, res);
+        if(sessionData){
+            fn(sessionData);
+        }else{
+            res.redirect(302, "/login");
+        }
+    }
 };

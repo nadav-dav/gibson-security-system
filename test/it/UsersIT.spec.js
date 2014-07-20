@@ -5,8 +5,8 @@
 
 var rek = require("rekuire");
 var q = require("q");
-var match = rek("responseMatchers");
 var TestTools = rek("TestTools");
+var makeSure = rek("makeSureMatchers");
 
 
 describe('Users IT', function () {
@@ -116,27 +116,3 @@ describe('Users IT', function () {
     }
 
 });
-
-
-
-var makeSure = {};
-makeSure.statusCodeIs = function (expectedStatusCode) {
-    return function (data) {
-        match(data.res).haveStatusCode(expectedStatusCode);
-        return data;
-    }
-};
-
-makeSure.hasTemporaryRedirectTo = function (url) {
-    return function (data) {
-        match(data.res).hasTemporaryRedirectTo(url);
-        return data;
-    }
-};
-
-makeSure.haveCookie = function (cookieName, expectedCookieValue) {
-    return function (data) {
-        match(data.res).hasCookie(cookieName, expectedCookieValue);
-        return data;
-    }
-};
