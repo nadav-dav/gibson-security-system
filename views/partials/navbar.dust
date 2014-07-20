@@ -1,36 +1,48 @@
-    <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <span class="navbar-brand">Gibson Server</span>                
-            </div>
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <!-- DROPDOWN LOGIN STARTS HERE  -->
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-info navbar-btn dropdown-toggle">
-                            <i class="glyphicon glyphicon-user"></i> 
-                                Guest
-                            &nbsp;<span class="caret"></span>
-                            </button>
-                        <ul class="dropdown-menu">
-                          <li style="width: 150px;">
-                                <form class="navbar-form form" role="form">
-                                    <div class="form-group">
-                                        <span class="pull-right"><a href="#">Log out</a></span>
-                                    </div>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- DROPDOWN LOGIN ENDS HERE  -->
-            </div>
+<div class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand">Gibson Server</span>                
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <!-- DROPDOWN LOGIN STARTS HERE  -->
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-info navbar-btn dropdown-toggle">
+                        <i class="glyphicon glyphicon-user"></i> 
+                            {.user.name}
+                        &nbsp;<span class="caret"></span>
+                        </button>
+                    <ul class="dropdown-menu">
+                      <li style="width: 150px;">
+                            <form class="navbar-form form" role="form">
+                                <div class="form-group">
+                                    <span id="logout" class="pull-right"><a href="#">Log out</a></span>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- DROPDOWN LOGIN ENDS HERE  -->
         </div>
     </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $(".navbar #logout").click(function () {
+           $.post( "/services/logout")
+            .done(function() {
+                window.location = "/login";
+            });
+        });
+    });
+</script>
+

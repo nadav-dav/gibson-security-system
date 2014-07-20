@@ -1,5 +1,5 @@
 {
-    
+
     "express": {
         "view cache": false,
         "view engine": "dust",
@@ -12,7 +12,9 @@
             "renderer": {
                 "method": "dust",
                 "arguments": [
-                    { "cache": false },
+                    {
+                        "cache": false
+                    },
                     {
                         "views": "config:express.views",
                         "view engine": "config:express.view engine",
@@ -38,7 +40,7 @@
                 "arguments": [
                     "path:./public",
                     "path:./.build",
-                    {   
+                    {
                         "template": {
                             "module": "kraken-devtools/plugins/dustjs",
                             "files": "/templates/**/*.js",

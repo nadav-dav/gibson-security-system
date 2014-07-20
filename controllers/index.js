@@ -4,12 +4,9 @@
 var rek = require("rekuire");
 var expressSessionHelper = rek("beans").session.expressSessionHelper;
 
-var IndexModel = require("../models/index");
-
 module.exports = function (router) {
-    var model = new IndexModel();
     router.get("/", function (req, res) {
-        onlyForLoggedInUsers(req, res, function(){
+        onlyForLoggedInUsers(req, res, function(sessionData){
             res.redirect(302, "/wall");
         });
     });
@@ -27,15 +24,16 @@ module.exports = function (router) {
     });
 
     router.get("/wall", function (req, res) {
-        onlyForLoggedInUsers(req, res, function(){
-            res.render("wall");
+        onlyForLoggedInUsers(req, res, function(sessionData){
+            var user = sessionData.user;
+            res.render("wall", {user: user});
         });
     });
 
     function onlyForLoggedInUsers(req, res, fn){
-        var isLoggedIn = expressSessionHelper.isLoggedIn(req, res);
-        if(isLoggedIn){
-            fn();
+        var sessionData = expressSessionHelper.getSessionData(req, res);
+        if(sessionData !== undefined){
+            fn(sessionData);
         }else{
             res.redirect(302, "/login");
         }

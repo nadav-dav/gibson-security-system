@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
-    "start": "node index.js"
+    "start": "export NODE_ENV='production' && node ."
   },
   "dependencies": {
     "adaro": "^0.1.5",
