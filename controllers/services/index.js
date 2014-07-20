@@ -2,34 +2,27 @@
 
 var rek = require("rekuire");
 var usersDao = rek("beans").db.usersDao;
-var session = rek("beans").session;
+var expressSessionHelper = rek("beans").session.expressSessionHelper;
 var User = rek("User");
 var q = rek("q");
 
 module.exports = function (router) {
 
     router.post("/login", function (req, res) {
-        usersDao.getUserByNameAndPassword(req.body.name, req.body.password)
-            .then(function (user) {
-                var sessionId = session.loginUser(user);
-                res.cookie("_gib_session", sessionId, {});
+        expressSessionHelper.login(req, res, {name: req.body.name, password: req.body.password})
+            .then(function () {
                 res.send();
-            })
-            .catch(function (e) {
-                res.status(500).send("Failed to login. Please check your credentials.");
             });
     });
 
     router.post("/register", function (req, res) {
-        q.fcall(function () {
-            return User.create({name: req.body.name, password: req.body.password});
-        })
-            .then(function (user) {
+        q()
+            .then(function () {
+                var user = User.create({name: req.body.name, password: req.body.password});
                 return usersDao.save(user);
             })
-            .then(function(user){
-                var sessionId = session.loginUser(user);
-                res.cookie("_gib_session", sessionId, {});
+            .then(function () {
+                return expressSessionHelper.login(req, res, {name: req.body.name, password: req.body.password});
             })
             .then(function () {
                 res.send();
@@ -43,5 +36,10 @@ module.exports = function (router) {
                 }
                 res.status(500).send(msg);
             });
+    });
+
+    router.post("/logout", function (req, res) {
+        expressSessionHelper.logout(req, res);
+        res.send();
     });
 };

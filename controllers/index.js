@@ -2,8 +2,7 @@
 
 
 var rek = require("rekuire");
-var session = rek("beans").session;
-
+var expressSessionHelper = rek("beans").session.expressSessionHelper;
 
 var IndexModel = require("../models/index");
 
@@ -34,8 +33,8 @@ module.exports = function (router) {
     });
 
     function onlyForLoggedInUsers(req, res, fn){
-        var sessionData = session.sessionOf(req);
-        if(sessionData){
+        var isLoggedIn = expressSessionHelper.isLoggedIn(req, res);
+        if(isLoggedIn){
             fn();
         }else{
             res.redirect(302, "/login");
@@ -43,8 +42,8 @@ module.exports = function (router) {
     }
 
     function onlyForNewUsers(req, res, fn){
-        var sessionData = session.sessionOf(req);
-        if(sessionData){
+        var isLoggedIn = expressSessionHelper.isLoggedIn(req, res);
+        if(isLoggedIn){
             res.redirect(302, "/wall");
         }else{
             fn();

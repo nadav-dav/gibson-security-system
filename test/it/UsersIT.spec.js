@@ -44,7 +44,7 @@ describe('Users IT', function () {
         ], done);
     });
 
-    it("should redirect '/' to '/wall' page if already registered", function (done) {
+    it("should redirect '/login' to '/wall' page if already registered", function (done) {
         server.run([
             register(credentials),
             goTo("/login"),
@@ -52,13 +52,28 @@ describe('Users IT', function () {
         ], done);
     });
 
-    it("should redirect '/' to '/wall' page if already registered", function (done) {
+    it("should redirect '/register' to '/wall' page if already registered", function (done) {
         server.run([
             register(credentials),
             goTo("/register"),
             makeSure.hasTemporaryRedirectTo("/wall")
         ], done);
     });
+
+    it("should be able to log out", function (done) {
+        server.run([
+            register(credentials),
+
+            goTo("/wall"),
+            makeSure.statusCodeIs(200),
+
+            logout,
+
+            goTo("/wall"),
+            makeSure.statusCodeIs(302)
+        ], done);
+    });
+
 
     /* -------------------------------------- */
 
@@ -96,6 +111,9 @@ describe('Users IT', function () {
         }
     };
 
+    var logout = function(){
+        return server.post("/services/logout")
+    }
 
 });
 

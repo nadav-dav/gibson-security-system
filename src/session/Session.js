@@ -13,18 +13,7 @@ var Session = (function () {
         return sessionId;
     };
 
-    Session.prototype.sessionOf = function (arg1) {
-        var sessionId
-        if (typeof arg1 === "string") {
-            sessionId = arg1;
-        } else {
-            var request = arg1;
-            try {
-                sessionId = request.cookies["_gib_session"];
-            } catch (e) {
-
-            }
-        }
+    Session.prototype.getSessionData = function (sessionId) {
         return loggedUsers[sessionId];
     };
 

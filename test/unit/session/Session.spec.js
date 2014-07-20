@@ -19,21 +19,21 @@ describe("Session", function () {
 
     it("should allow set 'user' field to the user object", function () {
         var sessionId = session.loginUser(user);
-        var sessionData = session.sessionOf(sessionId);
+        var sessionData = session.getSessionData(sessionId);
         expect(sessionData.user).toEqual(user);
     });
 
     it("should be able to store are retrieve data", function () {
         var sessionId = session.loginUser(user);
-        session.sessionOf(sessionId)["foo"] = "bar";
+        session.getSessionData(sessionId)["foo"] = "bar";
 
-        expect(session.sessionOf(sessionId)["foo"]).toBe("bar");
+        expect(session.getSessionData(sessionId)["foo"]).toBe("bar");
     });
 
     it("should be able to logout a session", function () {
         var sessionId = session.loginUser(user);
         session.logout(sessionId);
-        var sessionData = session.sessionOf(sessionId);
+        var sessionData = session.getSessionData(sessionId);
         expect(sessionData).toBe(undefined);
     });
 
@@ -44,11 +44,11 @@ describe("Session", function () {
         var sessionId2 = session.loginUser(user2);
 
         expect
-            (session.sessionOf(sessionId1).user)
+            (session.getSessionData(sessionId1).user)
             .toEqual(user1)
 
         expect
-            (session.sessionOf(sessionId2).user)
+            (session.getSessionData(sessionId2).user)
             .toEqual(user2)
 
     });
@@ -61,17 +61,4 @@ describe("Session", function () {
         expect(firstSessionId).toNotEqual(secondSessionId);
     });
 
-    it("should allow to login with request object", function () {
-        var sessionId = session.loginUser(user);
-        var req = mockRequestWithSession(sessionId);
-        var sessionFromId       = session.sessionOf(sessionId);
-        var sessionFromRequest  = session.sessionOf(req);
-
-        expect(sessionFromRequest).toBe(sessionFromId);
-    });
-
-
-    function mockRequestWithSession(session){
-        return { cookies: {_gib_session:session}};
-    }
 });
