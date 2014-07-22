@@ -5,62 +5,85 @@ var guid = rek("guid");
 var build = rek("Builders");
 var Message = rek("Message");
 
-describe("MessagesDao", function () {
-    var db, messagesDao, message, user;
+describe("MessagesDao", function() {
+    var db, messagesDao, message, user, userData;
 
-    beforeEach(function (done) {
+    beforeEach(function(done) {
         db = rek("InMemoryDb").create();
         messagesDao = new MessagesDao(db);
         messagesDao.createTableIfNotExists()
             .then(done)
             .catch(done);
         user = build.aUser();
-        message = Message.create({author: user.name, body: "Hello"})
+        userData = {
+            name: user.name,
+            id: user.id,
+            color: user.color
+        };
+        message = Message.create({
+            author: userData,
+            body: "Hello"
+        })
+        console.log(message.toString());
     });
 
-    it("should save a get a message", function (done) {
+    it("should save a get a message", function(done) {
         messagesDao.post(message)
-            .then(function () {
+            .then(function() {
                 return messagesDao.getMessages();
             })
-            .then(function (messages) {
+            .then(function(messages) {
                 expect(messages).toEqual([message]);
             })
             .then(done)
             .catch(done)
     });
 
-    it("should save more than one message", function (done) {
-        var message1 = Message.create({author: user.name, body: "Hello1"});
-        var message2 = Message.create({author: user.name, body: "Hello2"});
+    it("should save more than one message", function(done) {
+        var message1 = Message.create({
+            author: userData,
+            body: "Hello1"
+        });
+        var message2 = Message.create({
+            author: userData,
+            body: "Hello2"
+        });
 
         messagesDao.post(message1)
-            .then(function(){
+            .then(function() {
                 messagesDao.post(message2)
             })
-            .then(function () {
+            .then(function() {
                 return messagesDao.getMessages();
             })
-            .then(function (messages) {
+            .then(function(messages) {
                 expect(messages).toEqual([message1, message2]);
             })
             .then(done)
             .catch(done)
     });
 
-    it("should sort messages according to dateCreated and not when it was posted into the system", function (done) {
+    it("should sort messages according to dateCreated and not when it was posted into the system", function(done) {
         var now = Date.now();
-        var message1 = Message.create({author: user.name, body: "Hello1", dateCreated: now});
-        var message2 = Message.create({author: user.name, body: "Hello2", dateCreated: now - 10});
+        var message1 = Message.create({
+            author: userData,
+            body: "Hello1",
+            dateCreated: now
+        });
+        var message2 = Message.create({
+            author: userData,
+            body: "Hello2",
+            dateCreated: now - 10
+        });
 
         messagesDao.post(message1)
-            .then(function(){
+            .then(function() {
                 messagesDao.post(message2)
             })
-            .then(function () {
+            .then(function() {
                 return messagesDao.getMessages();
             })
-            .then(function (messages) {
+            .then(function(messages) {
                 expect(messages).toEqual([message2, message1]);
             })
             .then(done)

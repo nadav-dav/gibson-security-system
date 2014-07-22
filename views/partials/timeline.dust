@@ -63,8 +63,8 @@
                 messegesBox.prepend(newMessage);
                 shownMessages.push(message.id);
                 newMessage
-                    .animate({ "opacity":0, "margin-top": "-=100" }, 1)
-                    .animate({ "opacity":1, "margin-top": "+=100" }, 500);
+                    .animate({ "opacity":0 }, 1)
+                    .animate({ "opacity":1 }, 500);
             });            
         }
 
@@ -75,12 +75,15 @@
             var time2 = entry.find(".timeline-time span:nth-child(2)");
             var name = entry.find(".name");
             var body = entry.find(".message");
+            var dot = entry.find(".dot");
             var m = moment(message.dateCreated);
+            entry.css("display","inherit");
             time.attr("datetime", m.format());
             time1.html(m.format('hh:mm A'));
-            time2.html("");
-            name.html(message.author);
+            time2.html(m.format('dddd'));
+            name.html(message.author.name);
             body.html(message.body);
+            dot.css("background-color",message.author.color);
             return entry;
         }
     });
@@ -287,9 +290,9 @@
         margin-left: -9px;
     }
     .wall .timeline-entry .timeline-label h2, .wall .timeline-entry .timeline-label p {
-        color: #737881;
+        color: black;
         font-family: "Noto Sans", sans-serif;
-        font-size: 12px;
+        font-size: 18px;
         margin: 0;
         line-height: 1.428571429;
     }
@@ -297,8 +300,8 @@
         margin-top: 15px;
     }
     .wall .timeline-entry .timeline-label h2 {
-        font-size: 16px;
-        margin-bottom: 10px;
+        font-size: 12px;
+        margin-bottom: 0px;
     }
     .wall .timeline-entry .timeline-label h2 a {
         color: #303641;

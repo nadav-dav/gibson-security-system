@@ -6,7 +6,7 @@
     "main": "index.js",
     "scripts": {
         "test": "grunt test",
-        "start": "grunt build && export NODE_ENV='production' && node ."
+        "start": "export NODE_ENV='production' && node ."
     },
     "dependencies": {
         "adaro": "^0.1.5",
@@ -21,6 +21,7 @@
         "localizr": "^0.1.0",
         "lodash": "^2.4.1",
         "q": "^1.0.1",
+        "randomcolor": "^0.1.1",
         "rekuire": "^0.1.5",
         "sqlite3": "^2.2.3"
     },

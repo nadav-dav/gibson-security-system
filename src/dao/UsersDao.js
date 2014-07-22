@@ -3,38 +3,40 @@ var Promise = require("q").Promise;
 var rek = require("rekuire");
 var User = rek("User");
 
-var UsersDao = (function () {
+var UsersDao = (function() {
     function UsersDao(db) {
         this.db = db;
     }
 
-    UsersDao.prototype.createTableIfNotExists = function () {
+    UsersDao.prototype.createTableIfNotExists = function() {
         var db = this.db;
-        return new Promise(function (resolve, reject) {
+        return new Promise(function(resolve, reject) {
             db.run("CREATE TABLE IF NOT EXISTS users (" +
                 "id varchar(40) PRIMARY KEY NOT NULL, " +
                 "name varchar(100) NOT NULL UNIQUE, " +
                 "password varchar(100) NOT NULL, " +
-                "dateCreated BIGINT NOT NULL" +
-                ");", function (err) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            });
+                "dateCreated BIGINT NOT NULL," +
+                "color varchar(10) NOT NULL" +
+                ");", function(err) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
         });
     };
 
-    UsersDao.prototype.save = function (user) {
+    UsersDao.prototype.save = function(user) {
         var db = this.db;
-        return new Promise(function (resolve, reject) {
-            db.run("INSERT INTO users VALUES (?, ?, ?, ?)",
+        return new Promise(function(resolve, reject) {
+            db.run("INSERT INTO users VALUES (?, ?, ?, ?, ?)",
                 user.id,
                 user.name,
                 user.password,
                 user.dateCreated,
-                function (err) {
+                user.color,
+                function(err) {
                     if (err) {
                         reject(err);
                     } else {
@@ -43,16 +45,16 @@ var UsersDao = (function () {
                 });
         });
     };
-    UsersDao.prototype.getUserById = function (userId) {
+    UsersDao.prototype.getUserById = function(userId) {
         var db = this.db;
-        return new Promise(function (resolve, reject) {
+        return new Promise(function(resolve, reject) {
             var user;
             db.get(
-                "SELECT id, name, password, dateCreated " +
-                    "FROM users " +
-                    "WHERE id = ?",
+                "SELECT id, name, password, dateCreated, color " +
+                "FROM users " +
+                "WHERE id = ?",
                 userId,
-                function (err, row) {
+                function(err, row) {
                     if (err) {
                         reject(err)
                     } else {
@@ -67,15 +69,15 @@ var UsersDao = (function () {
         });
     };
 
-    UsersDao.prototype.getUserByNameAndPassword = function (name, password) {
+    UsersDao.prototype.getUserByNameAndPassword = function(name, password) {
         var db = this.db;
-        return new Promise(function (resolve, reject) {
+        return new Promise(function(resolve, reject) {
             db.get(
-                "SELECT id, name, password, dateCreated " +
-                    "FROM users " +
-                    "WHERE name = '" + name + "' AND" +
-                    "      password = '" + password + "'",
-                function (err, row) {
+                "SELECT id, name, password, dateCreated, color " +
+                "FROM users " +
+                "WHERE name = '" + name + "' AND" +
+                "      password = '" + password + "'",
+                function(err, row) {
                     if (err) {
                         reject(err)
                     } else {

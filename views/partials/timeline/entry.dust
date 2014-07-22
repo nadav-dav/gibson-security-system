@@ -1,12 +1,11 @@
-<article class="timeline-entry">                    
+<article class="timeline-entry" style="display:none">                    
     <div class="timeline-entry-inner">
         <time class="timeline-time" datetime="2014-01-10T03:45"><span>03:45 AM</span> <span>Today</span></time>                        
-        <div class="timeline-icon bg-success">
-            <i class="entypo-feather"></i>
+        <div class="timeline-icon bg-success dot">
         </div>                   
 
         <div class="timeline-label">
-            <h2><span class="name">Name</span> <span>posted a status update</span></h2>
+            <h2><span class="name">Name</span> <span>said:</span></h2>
             <p class="message">Message.</p>
         </div>
     </div>                    
