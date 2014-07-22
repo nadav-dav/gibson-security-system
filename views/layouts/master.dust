@@ -5,6 +5,8 @@
     <link rel="stylesheet" type="text/css" href="/components/bootstrap/dist/css/bootstrap.min.css">
 	<script type="text/javascript" src="/components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/components/lodash/dist/lodash.min.js"></script>
+    <script type="text/javascript" src="/components/moment/min/moment.min.js"></script>
     <style type="text/css">
 		body {
 			background-image: url(/img/background.jpg); 

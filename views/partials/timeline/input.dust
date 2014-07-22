@@ -1,4 +1,4 @@
-<article class="timeline-entry input">                    
+<article class="timeline-entry timeline-input">                    
     <div class="timeline-entry-inner">
         <div class="timeline-icon bg-success">
             <i class="entypo-feather"></i>
@@ -6,10 +6,10 @@
         <div class="timeline-label">
             <form role="form">
                 <div class="form-group">
-                    <textarea placeholder="Whats on your mind?" class="form-control" rows="3"></textarea> 
+                    <input type="text" id="postInput" placeholder="Whats on your mind?" class="form-control"/> 
                 </div>
                 <div> 
-                    <button type="submit" class="btn btn-primary">Post</button>
+                    <button id="postBtn" type="submit" class="btn btn-primary">Post</button>
                     <span> posted a status update</span>
                 </div>
             </form>                                        
