@@ -1,25 +1,27 @@
 {
-    "name": "Gibson",
-    "main": "index.js",
-    "version": "0.0.0",
-    "authors": [
-        "Nadav Leshem <nadavl@wix.com>"
-    ],
-    "description": "Gibson - a totally secured system!",
-    "license": "MIT",
-    "private": true,
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "public/components",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "dustjs-linkedin": "^2.0.3",
-        "dustjs-linkedin-helpers": "^1.1.1",
-        "jquery": "~2.1.1",
-        "bootstrap": "~3.2.0"
-    }
+  "name": "Gibson",
+  "main": "index.js",
+  "version": "0.0.0",
+  "authors": [
+    "Nadav Leshem <nadavl@wix.com>"
+  ],
+  "description": "Gibson - a totally secured system!",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "dustjs-linkedin": "^2.0.3",
+    "dustjs-linkedin-helpers": "^1.1.1",
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.2.0",
+    "lodash": "~2.4.1",
+    "moment": "~2.7.0"
+  }
 }

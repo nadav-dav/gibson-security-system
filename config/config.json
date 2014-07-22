@@ -12,15 +12,13 @@
             "renderer": {
                 "method": "dust",
                 "arguments": [{
-                        "cache": false
-                    },
-                    {
-                        "views": "config:express.views",
-                        "view engine": "config:express.view engine",
-                        "specialization": "config:specialization",
-                        "i18n": "config:i18n"
-                    }
-                ]
+                    "cache": false
+                }, {
+                    "views": "config:express.views",
+                    "view engine": "config:express.view engine",
+                    "specialization": "config:specialization",
+                    "i18n": "config:i18n"
+                }]
             }
         }
     },
@@ -34,7 +32,7 @@
 
         "static": {
             "module": {
-                "arguments": ["path:./.build"]
+                "arguments": ["path:./public"]
             }
         },
 
