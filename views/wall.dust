@@ -2,6 +2,7 @@
 {<title}Wall{/title}
 
 {<body}
+	{>"partials/notify"/}
     {>"partials/navbar"/}
     {>"partials/timeline"/}
 {/body}

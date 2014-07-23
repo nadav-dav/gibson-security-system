@@ -14,7 +14,7 @@
             <!-- DROPDOWN LOGIN STARTS HERE  -->
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-info navbar-btn dropdown-toggle">
+                    <button type="button" id="dropdownMenu" data-toggle="dropdown" class="btn btn-info navbar-btn dropdown-toggle">
                         <i class="glyphicon glyphicon-user"></i> 
                             {.user.name}
                         &nbsp;<span class="caret"></span>

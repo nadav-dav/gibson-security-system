@@ -57,7 +57,7 @@
         function submit () {            
             $.post( "/services/register", {name: usernameInput.val(), password: passwordInput.val()})
             .done(function() {
-                window.location = "/wall"
+                window.location = "/wall?message=Welcome+"+usernameInput.val()+"!+You+are+now+registered!";
             })
             .fail(function(res) {
                 errorBox.show();

@@ -75,7 +75,7 @@
             
             $.post( "/services/login", {name: usernameInput.val(), password: passwordInput.val()})
             .done(function() {
-                window.location = "/wall";
+                window.location = "/wall?message=Welcome+back+"+usernameInput.val()+"!";
             })
             .fail(function(res) {
                 errorBox.show();
