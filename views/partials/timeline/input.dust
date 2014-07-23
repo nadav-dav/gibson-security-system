@@ -1,7 +1,6 @@
 <article class="timeline-entry timeline-input">                    
     <div class="timeline-entry-inner">
-        <div class="timeline-icon bg-success">
-            <i class="entypo-feather"></i>
+        <div class="timeline-icon bg-success" style="background-color:{.user.color};">
         </div>                        
         <div class="timeline-label">
             <form role="form">
