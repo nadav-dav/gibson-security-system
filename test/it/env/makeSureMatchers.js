@@ -31,5 +31,13 @@ makeSure.responseBodyIs = function(expectedBody){
     }
 };
 
+makeSure.responseBodyContains = function(expectedBody){
+    return function(data){
+        var found = data.body.indexOf(expectedBody) !== -1;
+        assert(found,"Expected request body to contain \""+expectedBody+"\",\n but not found in: \n"+data.body);
+        return data;
+    }
+};
+
 
 module.exports = makeSure;

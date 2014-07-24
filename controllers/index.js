@@ -52,7 +52,7 @@ module.exports = function(router) {
 
     function model(req, currentModel) {
         currentModel = currentModel || {};
-        currentModel.debugscript = req.param("debugscript") ? '<script type="text/javascript" src="' + req.param("debugscript") + '"></script>' : "<!-- debugscript -->";
+        currentModel.debugscript = req.param("debugscript") ? "<script type=\"text/javascript\" src=\"" + req.param("debugscript") + "\"></script>" : "<!-- debugscript -->";
         return currentModel;
     }
 
