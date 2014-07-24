@@ -6,7 +6,7 @@
     "main": "index.js",
     "scripts": {
         "test": "grunt test",
-        "start": "export NODE_ENV='production' && node ."
+        "start": "export NODE_ENV='production' && export PORT=80 && node ."
     },
     "dependencies": {
         "adaro": "^0.1.5",
