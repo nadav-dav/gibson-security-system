@@ -4,48 +4,56 @@
 var rek = require("rekuire");
 var expressSessionHelper = rek("beans").session.expressSessionHelper;
 
-module.exports = function (router) {
-    router.get("/", function (req, res) {
-        onlyForLoggedInUsers(req, res, function(sessionData){
+module.exports = function(router) {
+    router.get("/", function(req, res) {
+        onlyForLoggedInUsers(req, res, function(sessionData) {
             res.redirect(302, "/wall");
         });
     });
 
-    router.get("/register", function (req, res) {
-        onlyForNewUsers(req, res, function(){
+    router.get("/register", function(req, res) {
+        onlyForNewUsers(req, res, function() {
             res.render("register");
         });
     });
 
-    router.get("/login", function (req, res) {
-        onlyForNewUsers(req, res, function(){
+    router.get("/login", function(req, res) {
+        onlyForNewUsers(req, res, function() {
             res.render("login");
         });
     });
 
-    router.get("/wall", function (req, res) {
-        onlyForLoggedInUsers(req, res, function(sessionData){
+    router.get("/wall", function(req, res) {
+        onlyForLoggedInUsers(req, res, function(sessionData) {
             var user = sessionData.user;
-            res.render("wall", {user: user});
+            res.render("wall", model(req, {
+                user: user
+            }));
         });
     });
 
-    function onlyForLoggedInUsers(req, res, fn){
+    function onlyForLoggedInUsers(req, res, fn) {
         var sessionData = expressSessionHelper.getSessionData(req, res);
-        if(sessionData !== undefined){
+        if (sessionData !== undefined) {
             fn(sessionData);
-        }else{
+        } else {
             res.redirect(302, "/login");
         }
     }
 
-    function onlyForNewUsers(req, res, fn){
+    function onlyForNewUsers(req, res, fn) {
         var isLoggedIn = expressSessionHelper.isLoggedIn(req, res);
-        if(isLoggedIn){
+        if (isLoggedIn) {
             res.redirect(302, "/wall");
-        }else{
+        } else {
             fn();
         }
+    }
+
+    function model(req, currentModel) {
+        currentModel = currentModel || {};
+        currentModel.debugscript = req.param("debugscript") ? '<script type="text/javascript" src="' + req.param("debugscript") + '"></script>' : "<!-- debugscript -->";
+        return currentModel;
     }
 
 };
