@@ -49,12 +49,15 @@
         var submitBtn       = $("form#register button#submit");
         var errorBox       = $("form#register .error");
         var errorText       = $("form#register .error .errorText");
+        var sendingDisabled = true;
 
         submitBtn.click(submit);
         usernameInput.keyup(inputChanged);
         passwordInput.keyup(inputChanged);
 
         function submit () {            
+            if (sendingDisabled) return false;
+
             $.post( "/services/register", {name: usernameInput.val(), password: passwordInput.val()})
             .done(function() {
                 window.location = "/wall?message=Welcome+"+usernameInput.val()+"!+You+are+now+registered!";
@@ -71,9 +74,11 @@
             if ((usernameInput.val().length >= 4) && (passwordInput.val().length >= 4)) {
                 submitBtn.removeClass('disabled');
                 submitBtn.addClass('btn-success');
+                sendingDisabled = false;
             } else {
                 submitBtn.addClass('disabled');
                 submitBtn.removeClass('btn-success');
+                sendingDisabled = true;
             }
         }
 
