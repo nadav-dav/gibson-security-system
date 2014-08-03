@@ -1,13 +1,19 @@
 XSS 2 - En garde!!
 ---------------------------------
 
-F@ck.
+![image](img/Armor.png)
+
+(-_-)
 
 They got us again.
 
-Well, shame on us, we let them inject unsanitized data from the url, directly into the code! no no no.. thats bad..
+Well, shame on us, we let them inject unsanitized data from the url, directly into the code! no no no.. **thats bad**..
 
-Try to think of a better way to display the message, without having it injected via url (one solution for example is to use enums, think about it).
+### Refactor
+
+Try to think of a better way to display the message, without having it injected via url 
+
+> one solution for example is to use enums, think about it.
 
 .. 
 

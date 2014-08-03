@@ -64,7 +64,7 @@
             })
             .fail(function(res) {
                 errorBox.show();
-                errorText.text(res.responseText);
+                errorText.text(res.responseJSON.message);
             });
             
             return false;

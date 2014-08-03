@@ -1,6 +1,8 @@
 SQLI - No Password Needed!
 ----------------------------
 
+![image](img/Fire_Dragon.png)
+
 SQLI - or SQL Injection, is a really simple vector of attack and it is very common to find vulnerable applications.
 
 In this section we will try to hijack a user account, and log in as the victim.

@@ -1,5 +1,6 @@
 XSS 3 - Come ON!
 ----------------
+![image](img/Music_4.png)
 
 The road to hell if paved with good intensions..
 

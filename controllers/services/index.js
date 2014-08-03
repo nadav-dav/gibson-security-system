@@ -16,7 +16,10 @@ module.exports = function(router) {
             password: req.body.password
         })
             .then(function() {
-                res.send();
+                res.json();
+            })
+            .catch(function(e) {
+                res.status(500).json(errorResponse("Failed to login. Please check your credentials.", e));
             });
     });
 
@@ -36,7 +39,7 @@ module.exports = function(router) {
                 });
             })
             .then(function() {
-                res.send();
+                res.json();
             })
             .catch(function(e) {
                 var msg = "";
@@ -45,14 +48,14 @@ module.exports = function(router) {
                 } else {
                     msg = "Failed to register. Please try again later.";
                 }
-                res.status(500).send(msg);
+                res.status(500).json(msg, e);
             });
     });
 
     router.post("/logout", function(req, res) {
         onlyForLoggedInUsers(req, res, function(sessionData) {
             expressSessionHelper.logout(req, res);
-            res.send();
+            res.json();
         });
     });
 
@@ -68,9 +71,9 @@ module.exports = function(router) {
                 body: req.body.message
             });
             messagesDao.post(msg).then(function() {
-                res.send();
+                res.json();
             }).catch(function(e) {
-                res.status(500).send("Failed to post a message, Please try again later.");
+                res.status(500).json(errorResponse("Failed to post a message, Please try again later.", e));
             });
 
         });
@@ -84,10 +87,17 @@ module.exports = function(router) {
                     res.send("[" + messages.toString() + "]");
                 })
                 .catch(function(e) {
-                    res.status(500).send("Failed to retrieve messages. " + e);
+                    res.status(500).json(errorResponse("Failed to retrieve messages. ", e));
                 });
         });
     });
+
+    function errorResponse(message, error) {
+        return {
+            error: error.toString(),
+            message: message
+        };
+    }
 
     function onlyForLoggedInUsers(req, res, fn) {
         var sessionData = expressSessionHelper.getSessionData(req, res);

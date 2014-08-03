@@ -1,5 +1,6 @@
 CSRF - Come in Dogfort!
-----------------------------
+-----------------------
+![image](img/Castle.png)
 
 The kittens has struck again, but let's show them who let the dogs out!
 
@@ -7,9 +8,11 @@ Defending against CSRF attacks is usually a system-wide effort.
 
 You can ready about it [here]("https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet").
 
+### Defend!
+
 We are going to add this behaviour:
 
-1. All requests to all "/services/..." endpoints, will have to have an *"_csrf_token"* input field. that means editing the "/login", "/register" and "/wall" pages.
+1. All requests to all **"/services/..."** endpoints, will have to have an **"_csrf_token"** input field. that means editing the "/login", "/register" and "/wall" pages.
 
 2. It will contain a string, that is an encryption of the user's session. this should be calculated **server side** and be injected into the form.
 
@@ -17,7 +20,7 @@ We are going to add this behaviour:
 
 4. This way, the attacker won't be able to mimic the POST request, since it does not know the token! simple right?
 
-I suggest you use [crypto-js](https://www.npmjs.org/package/crypto-js) to help you with encrypting/decrypting the token. (it is already installed in your project) just use: 
+I suggest you use [crypto-js](https://www.npmjs.org/package/crypto-js) to help you with encrypting/decrypting the token. (it is already installed in your project as dependency) just use: 
 
 ```
 var CryptoJS = require("crypto-js");

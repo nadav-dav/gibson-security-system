@@ -1,5 +1,6 @@
 HACK THE GIBSON!
 ----------------------
+![image](img/ele_ice.png)
 
 Welcome welcome boys and girls!
 

@@ -75,13 +75,13 @@
         function submit () {
             if (sendingDisabled) return false; 
 
-            $.post( "/services/login", {name: usernameInput.val(), password: passwordInput.val()})
+            $.post( "/services/login", {name: usernameInput.val(), password: passwordInput.val()}, 'json')
             .done(function() {
                 window.location = "/wall?message=Welcome+back+"+usernameInput.val()+"!";
             })
             .fail(function(res) {
                 errorBox.show();
-                errorText.text(res.responseText);
+                errorText.text(res.responseJSON.message);
             });
 
             return false;
