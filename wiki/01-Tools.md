@@ -16,4 +16,4 @@ To install it, type `sudo npm install serve -g`
 
 - - - 
 ####done? great! 
-[let's go!](02-XSS.md)
+[let's go!](02-XSS1.md)

@@ -31,4 +31,4 @@ And now for some client side magic - find the difference between jQuery's `.html
 
 - - - 
 #### Does it move? yes! should it? no! Duct tape!
-[Does it move? no! should it? yes! WD-40!](02-XSS.md)
+[Does it move? no! should it? yes! WD-40!](04-XSS2.md)

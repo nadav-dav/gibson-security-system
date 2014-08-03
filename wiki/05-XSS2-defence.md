@@ -17,4 +17,4 @@ As you realise, defending the system is all about sanitising input, and sending 
 
 - - - 
 #### Cool, now this page is safe again
-[Do a little victory dance - an move on](02-XSS.md)
+[Do a little victory dance - an move on](06-XSS3.md)

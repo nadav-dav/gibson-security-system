@@ -23,4 +23,4 @@ OH my god! so cute! mew! [add you malicious page here]
 
 - - - 
 #### Cat? (ding) I'm a kitty cat[!](https://www.youtube.com/watch?v=CNP5erCmYcQ)
-[and I dance dance dance, and I dance dance dance!](02-XSS.md)
+[and I dance dance dance, and I dance dance dance!](09-CSRF-defence.md)

@@ -14,4 +14,4 @@ This debug param has *got to go*!
 
 - - - 
 #### Ok, I had just enough of this!
-[What about those SDRF attacks you promised me?!](02-XSS.md)
+[What about those SDRF attacks you promised me?!](08-CSRF.md)
