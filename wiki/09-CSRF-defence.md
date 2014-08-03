@@ -36,4 +36,4 @@ console.log('decrypted', decrypted);
 
 - - - 
 #### This is getting REAL!
-[let's try some sql stuff!](02-XSS.md)
+[let's try some sql stuff!](10-SQLI.md)
