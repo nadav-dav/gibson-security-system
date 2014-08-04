@@ -16,7 +16,7 @@ module.exports = function(router) {
             password: req.body.password
         })
             .then(function() {
-                res.json();
+                res.json({});
             })
             .catch(function(e) {
                 res.status(500).json(errorResponse("Failed to login. Please check your credentials.", e));
@@ -39,7 +39,7 @@ module.exports = function(router) {
                 });
             })
             .then(function() {
-                res.json();
+                res.json({});
             })
             .catch(function(e) {
                 var msg = "";
@@ -55,7 +55,7 @@ module.exports = function(router) {
     router.post("/logout", function(req, res) {
         onlyForLoggedInUsers(req, res, function(sessionData) {
             expressSessionHelper.logout(req, res);
-            res.json();
+            res.json({});
         });
     });
 
@@ -71,7 +71,7 @@ module.exports = function(router) {
                 body: req.body.message
             });
             messagesDao.post(msg).then(function() {
-                res.json();
+                res.json({});
             }).catch(function(e) {
                 res.status(500).json(errorResponse("Failed to post a message, Please try again later.", e));
             });

@@ -14,7 +14,7 @@ xdescribe("Register And Login end 2 end", function() {
                     assert.ok(browser.success);
                     assert.equal(browser.location.pathname, "/wall");
                     done();
-                });
+                })
         });
     });
 

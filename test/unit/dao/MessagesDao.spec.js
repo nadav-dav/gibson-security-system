@@ -23,8 +23,7 @@ describe("MessagesDao", function() {
         message = Message.create({
             author: userData,
             body: "Hello"
-        })
-        console.log(message.toString());
+        });
     });
 
     it("should save a get a message", function(done) {
