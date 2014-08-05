@@ -1,4 +1,4 @@
-# [Start here!](blob/master/wiki/00-Intro.md)
+# [Start here!](wiki/00-Intro.md)
 
 
 ```
