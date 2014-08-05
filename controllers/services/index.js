@@ -102,9 +102,24 @@ module.exports = function(router) {
     function onlyForLoggedInUsers(req, res, fn) {
         var sessionData = expressSessionHelper.getSessionData(req, res);
         if (sessionData) {
-            fn(sessionData);
+            csrfProtection(req, res, sessionData, function () {
+                fn(sessionData);
+            });
         } else {
             res.redirect(302, "/login");
+        }
+    }
+
+    function csrfProtection(req, res, sessionData, fn) {
+        var isCsrfTokenValid = true; 
+        /** 
+        ADD CSRF SUPPORT HERE 
+        you can user sessionData.user.id to validate the token
+        **/
+        if (isCsrfTokenValid) {
+            fn();
+        } else {
+            res.status(500).json(errorResponse("Missing CSRF token", e));
         }
     }
 };

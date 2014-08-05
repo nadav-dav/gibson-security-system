@@ -11,9 +11,9 @@ Well, shame on us, we let them inject unsanitized data from the url, directly in
 
 ### Refactor
 
-Try to think of a better way to display the message, without having it injected via url 
+Try to think of a better way to display the message, without having it injected via url - one solution for example is to use enums, think about it.
 
-> one solution for example is to use enums, think about it.
+> Hint: Look at `notify.dust`, `login.dust` and `register.dust` files. there lays the logic of the "Welcome" message
 
 .. 
 

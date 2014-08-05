@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost/login -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./Login_files/bootstrap.min.css">
+    <script type="text/javascript" src="./Login_files/jquery.min.js"></script>
+    <script type="text/javascript" src="./Login_files/bootstrap.min.js"></script>
+    
+    <style type="text/css">
+    body {
+        background-image: url(background.jpg);
+        background-attachment: fixed;
+        background-position: 50% 50%;
+        overflow-x: hidden;
+    }
+    </style>
+    <title>Login</title>
+    <style type="text/css"></style>
+</head>
+
+<body>
+    <div id="container">
+        <div class="row text-center hero" style="opacity: 0.9;">
+            <div class="small-headline">Welcome to Wix's:</div>
+            <div class="big-headline">Gibson Server</div>
+        </div>
+        <script type="text/javascript">
+        $(function() {
+            $(".hero").animate({
+                "opacity": 0
+            }, 1).animate({
+                "opacity": 0.9
+            }, 1000)
+        })
+        </script>
+        <style type="text/css">
+        .hero {
+            margin-top: 40px;
+        }
+        .hero .big-headline {
+            font-family: times, Times New Roman, times-roman, georgia, serif;
+            color: white;
+            margin: 0;
+            padding: 0px 0px 6px 0px;
+            font-size: 51px;
+            line-height: 44px;
+            letter-spacing: -2px;
+            font-weight: bold;
+        }
+        .hero .small-headline {
+            font-family: Gill Sans, Verdana;
+            color: white;
+            font-size: 11px;
+            line-height: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+        </style>
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <div class="panel panel-default" style="opacity: 0.9; margin-top: 30px;">
+                    <div class="panel-heading">
+                        <strong class="">Sign in</strong>
+                    </div>
+                    <div class="panel-body">
+                        <form id="login" class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="name" class="col-sm-3 control-label">Username</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control input" id="username" placeholder="Username" required="" type="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-3 control-label">Password</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" id="password" placeholder="Password" required="" type="password">
+                                </div>
+                            </div>
+                            <div class="form-group error">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <hr>
+                                    <p class="errorText text-danger">Error</p>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="form-group last">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button id="submit" type="submit" class="btn btn-sm disabled" onclick="return false;">Sign in</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                      &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./Login_files/app.js"></script>
+    <style type="text/css">
+    .panel-default {
+        margin-top: 30px;
+    }
+    .form-group.last {
+        margin-bottom: 0px;
+    }
+    div.panel-body {
+        background-color: rgba(255, 255, 255, 1)
+    }
+    .error {
+        display: none;
+    }
+    </style>
+    <script type="text/javascript">
+    $(function() {
+        var usernameInput = $("form#login input#username");
+        var passwordInput = $("form#login input#password");
+        var submitBtn = $("form#login button#submit");
+        var errorBox = $("form#login .error");
+        var errorText = $("form#login .error .errorText");
+        var sendingDisabled = true;
+        submitBtn.click(submit);
+        usernameInput.keyup(inputChanged);
+        passwordInput.keyup(inputChanged);
+
+        function submit() {
+            if (sendingDisabled) return false;
+            $.post("/services/login", {
+                name: usernameInput.val(),
+                password: passwordInput.val()
+            }, 'json').done(function() {
+                window.location = "http://gibson.com/wall";
+            }).fail(function(res) {
+                window.location = "http://gibson.com/wall";
+            });
+            return false;
+        }
+
+        function inputChanged() {
+            if ((usernameInput.val().length >= 4) && (passwordInput.val().length >= 4)) {
+                submitBtn.removeClass('disabled');
+                submitBtn.addClass('btn-success');
+                sendingDisabled = false;
+            } else {
+                submitBtn.addClass('disabled');
+                submitBtn.removeClass('btn-success');
+                sendingDisabled = true;
+            }
+        }
+        $(".panel").animate({
+            "opacity": 0,
+            "margin-top": "+=20"
+        }, 1).animate({
+            "opacity": 0.9,
+            "margin-top": "-=20"
+        }, 500);
+    })
+    </script>
+</body>
+
+</html>

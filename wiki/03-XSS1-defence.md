@@ -9,7 +9,7 @@ We are going to stop the hacker form being able to get `document.cookie`!
 
 > Some cookies **cannot be read via scripts**.
 
-Here is a [step by step guide](http://lmgtfy.com/?q=you+didn%27t+think+i+would+make+it+this+easy+right%3F+search+for+it!) explaining how to protect the sessions.
+Here is a [step by step guide](http://lmgtfy.com/?q=protecting+your+cookies+from+appearing+in+%22document.cookie%22) explaining how to protect the sessions.
 
 ... 
 
@@ -19,6 +19,8 @@ Here is a [step by step guide](http://lmgtfy.com/?q=you+didn%27t+think+i+would+m
 
 ### Fix it!
 Go over the code, and add the right patch to prevent cookies bleeding into the client side!
+
+> Hint: Look at a file called `ExpressSessionHelper.js` and see where is sets the session cookie.
 
 Think you got it? restart the server to invalidate the sessions. and now try to hack it again using the previews method.
 
@@ -39,6 +41,8 @@ Let's handle the client side.. we know our data is already corrupted, so we'll n
 * Find the [difference](http://stackoverflow.com/questions/1910794/what-is-the-difference-between-jquery-text-and-html) between jQuery's `.html()` and `.text()`. 
 
 Got it? well go on than! apply the change on your system! 
+
+> Hint: Look at `timeline.dust` file, and look for where the messages are created.
 
 - - - 
 #### Does it move? yes! should it? no! Duct tape[!](http://photos.foter.com/123/engineering-flowchart-does-it-move-wd40-vs-duct-tape-original-artist-unknown_l.jpg)

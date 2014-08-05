@@ -13,6 +13,7 @@
 
 <script type="text/javascript">
     $(function () {
+        var csrfToken = "{.csrfToken}";
         var postBtn = $(".timeline-input #postBtn");
         var postInput = $(".timeline-input #postInput");
         var messegesBox = $(".wall #messagesGoesHere");
@@ -29,7 +30,7 @@
         });
 
         function postMessage (message) {
-            $.post( "/services/messages", {message: message})
+            $.post( "/services/messages", {message: message, csrfToken: csrfToken})
                 .then(function () {
                     updateMessagesOnWall();
                 });

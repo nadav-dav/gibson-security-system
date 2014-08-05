@@ -15,7 +15,7 @@ In order to start hacking, we are going to need some tools!
 ### [Serve](https://www.npmjs.org/package/serve)
 * We want to setup a simple web server, where we will send the victims credentials to, I like to use *serve* .
 To install it, type `sudo npm install serve -g`
-
+	to run it, just type `serve` in your console.
 - - - 
 ####done? great! 
 [let's go!](02-XSS1.md)

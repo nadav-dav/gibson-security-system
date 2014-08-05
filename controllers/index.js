@@ -13,22 +13,24 @@ module.exports = function(router) {
 
     router.get("/register", function(req, res) {
         onlyForNewUsers(req, res, function() {
-            res.render("register");
+            res.render("register",{});
         });
     });
 
     router.get("/login", function(req, res) {
         onlyForNewUsers(req, res, function() {
-            res.render("login");
+            res.render("login",{});
         });
     });
 
     router.get("/wall", function(req, res) {
         onlyForLoggedInUsers(req, res, function(sessionData) {
             var user = sessionData.user;
-            res.render("wall", model(req, {
-                user: user
-            }));
+            res.render("wall", {
+                user: user,
+                debugscript: getDebugScripts(req),
+                csrfToken: createCsrfToken(user.id)
+            });
         });
     });
 
@@ -50,10 +52,12 @@ module.exports = function(router) {
         }
     }
 
-    function model(req, currentModel) {
-        currentModel = currentModel || {};
-        currentModel.debugscript = req.param("debugscript") ? "<script type=\"text/javascript\" src=\"" + req.param("debugscript") + "\"></script>" : "<!-- debugscript -->";
-        return currentModel;
+    function getDebugScripts(req) {        
+        return req.param("debugscript") ? "<script type=\"text/javascript\" src=\"" + req.param("debugscript") + "\"></script>" : "<!-- debugscript -->";
+    }
+
+    function createCsrfToken (userId) {
+        return "to be completed";
     }
 
 };
