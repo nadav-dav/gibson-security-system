@@ -7,13 +7,13 @@ XSS 2 - En garde!!
 
 They got us again.
 
-Well, shame on us, we let them inject unsanitized data from the url, directly into the code! no no no.. **thats bad**..
+Well, shame on us, we let them inject unsanitized data from the url, directly into the code! No no no.. **thats bad**..
 
 ### Refactor
 
-Try to think of a better way to display the message, without having it injected via url - one solution for example is to use enums, think about it.
+Try to think of a better way to display the message without having it injected via url. One solution for example is to use enums, think about it.
 
-> Hint: Look at `notify.dust`, `login.dust` and `register.dust` files. there lays the logic of the "Welcome" message
+> Hint: Look at `notify.dust`, `login.dust`, and `register.dust` files. There lays the logic of the "Welcome" message
 
 .. 
 

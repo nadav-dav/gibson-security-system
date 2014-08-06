@@ -5,7 +5,7 @@ SQLI - Defence!
 
 What can we learn from little Bobby's mom?
 
-When handling SQL strings, we need to be very (!) carful about what we put into the query.
+When handling SQL strings, we need to be very (!) careful about what we put into the query.
 
 ### What not to do?
 **DO NOT** try to sanitize the data yourself!

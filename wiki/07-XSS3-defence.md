@@ -2,11 +2,11 @@ XSS 3 - Come ON!
 ----------------
 ![image](img/Music_4.png)
 
-The road to hell if paved with good intensions..
+The road to hell is paved with good intensions..
 
 This debug param has *got to go*!
 
-**But**, the development team still needs to inject files for debug purposes.. 
+**But**, the development team still needs to inject files for debugging purposes.. 
 
 1. First, **sanitize** the data that could be injected, think about how to do that..
 
@@ -14,5 +14,5 @@ This debug param has *got to go*!
 
 
 - - - 
-#### Ok, I had just enough of this!
+#### Ok, I've had enough of this!
 [What about those SDRF attacks you promised me?!](08-CSRF.md)
