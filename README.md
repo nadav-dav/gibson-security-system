@@ -1,4 +1,6 @@
-# [Start here!](wiki/00-Intro.md)
+
+
+# Clone the repo and [Start here!](wiki/00-Intro.md)
 
 
 ```
