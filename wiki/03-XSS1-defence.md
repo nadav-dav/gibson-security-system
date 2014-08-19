@@ -17,7 +17,7 @@ Here is a [step by step guide](http://lmgtfy.com/?q=protecting+your+cookies+from
 
 ..
 
-### Fix it!
+### Prevent access to the cookie from the browser!
 Go over the code and add the right patch to prevent cookies bleeding into the client side!
 
 > Hint: Look at a file called `ExpressSessionHelper.js` and see where it sets the session cookie.
@@ -32,7 +32,7 @@ Think you got it? Restart the server to invalidate the sessions. Now try to hack
 
 GOOD!
 
-### Still not fixed!
+### Still not fixed - escape the data!
 
 We have prevented the attacker from getting our precious user session, but scripts can still be injected into our page!
 
