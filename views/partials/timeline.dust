@@ -20,7 +20,8 @@
         var entryTemplate = $("entrytemplate").html();
         
         updateMessagesOnWall();
-        setInterval(updateMessagesOnWall, 1000);
+        waitForUpdates();
+
 
 
         postBtn.click(function () {
@@ -29,11 +30,21 @@
             return false;
         });
 
+        function waitForUpdates(){
+            $.get("/services/messages/wait?"+Math.random())
+                .then(function (answer){
+                    var updated = eval(answer);
+                    if (updated){
+                        updateMessagesOnWall();   
+                    }
+                    waitForUpdates();
+                }, function fail (argument) {
+                    waitForUpdates()
+                })
+        }
+
         function postMessage (message) {
             $.post( "/services/messages", {message: message, csrfToken: csrfToken})
-                .then(function () {
-                    updateMessagesOnWall();
-                });
         }
 
 
@@ -79,6 +90,14 @@
             var m = moment(message.dateCreated);
             entry.css("display","inherit");
             time.attr("datetime", m.format());
+            /** 
+            Notice the different between .html() and .text() functions of jQuery:
+
+            var element = $('div');
+            element.html('<span>not escaped</span>')    --> <div><span>not escaped</span></div>
+            element.text('<span>escaped</span>')        --> <div>&lt;span&gt;escaped&lt;/span&gt;</div>
+
+            **/
             time1.html(m.format('hh:mm A'));
             time2.html(m.format('dddd'));
             name.html(message.author.name);

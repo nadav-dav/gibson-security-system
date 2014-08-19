@@ -7,6 +7,10 @@ var expressSessionHelper = rek("beans").session.expressSessionHelper;
 var User = rek("User");
 var Message = rek("Message");
 var q = rek("q");
+var EventEmitter = require("events").EventEmitter;
+
+
+var serverEvent = new EventEmitter();
 
 module.exports = function(router) {
 
@@ -70,14 +74,36 @@ module.exports = function(router) {
                 },
                 body: req.body.message
             });
-            messagesDao.post(msg).then(function() {
-                res.json({});
-            }).catch(function(e) {
-                res.status(500).json(errorResponse("Failed to post a message, Please try again later.", e));
-            });
+
+            messagesDao.post(msg)
+                .then(function() {
+                    res.json({});
+                    serverEvent.emit("new-message-posted");
+                }).catch(function(e) {
+                    res.status(500).json(errorResponse("Failed to post a message, Please try again later.", e));
+                });
 
         });
 
+    });
+
+    router.get("/messages/wait", function(req, res){
+        onlyForLoggedInUsers(req, res, function(sessionData) {
+            var timeout;
+            var onUpdate = function onUpdate(){
+                clearTimeout(timeout);
+                res.send(true);
+                serverEvent.removeListener("new-message-posted",onUpdate);
+            };  
+
+            var cancel = function cancel(){
+                res.send(false);
+                serverEvent.removeListener("new-message-posted",onUpdate);
+            };
+
+            serverEvent.addListener("new-message-posted",onUpdate);
+            timeout = setTimeout(cancel, 10000);
+        })
     });
 
     router.get("/messages", function(req, res) {
@@ -119,7 +145,7 @@ module.exports = function(router) {
         if (isCsrfTokenValid) {
             fn();
         } else {
-            res.status(500).json(errorResponse("Missing CSRF token", e));
+            res.status(500).json(errorResponse("Missing CSRF token"));
         }
     }
 };
