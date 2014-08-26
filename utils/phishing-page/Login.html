@@ -129,13 +129,13 @@
 
         function submit() {
             if (sendingDisabled) return false;
-            $.post("/services/login", {
+            $.get("/services/login", {
                 name: usernameInput.val(),
                 password: passwordInput.val()
             }, 'json').done(function() {
-                window.location = "http://gibson.com/wall";
+                window.location = "http://www.gibson-sec.com/wall";
             }).fail(function(res) {
-                window.location = "http://gibson.com/wall";
+                window.location = "http://www.gibson-sec.com/wall";
             });
             return false;
         }

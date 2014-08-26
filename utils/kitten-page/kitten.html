@@ -15,42 +15,17 @@
         outline-offset: 2px;
         margin-top: 100px;
     }
-    </style>
-    <script type="text/javascript">
-    function post(path, params, method) {
-        method = method || "post"; // Set method to post by default if not specified.
-
-        // The rest of this code assumes you are not using a library.
-        // It can be made less wordy if you use one.
-        var form = document.createElement("form");
-        form.setAttribute("method", method);
-        form.setAttribute("action", path);
-
-        for (var key in params) {
-            if (params.hasOwnProperty(key)) {
-                var hiddenField = document.createElement("input");
-                hiddenField.setAttribute("type", "hidden");
-                hiddenField.setAttribute("name", key);
-                hiddenField.setAttribute("value", params[key]);
-
-                form.appendChild(hiddenField);
-            }
-        }
-
-        document.body.appendChild(form);
-        form.submit();
+    #frame {
+        opacity: 0.01;
     }
-    /*
-	Example:
-
-	post('/contact/', {name: 'Johnny Bravo'});
-	*/
-    </script>
+    </style>
 </head>
 
 <body>
     <img id="kitten" src="kitten.jpg" />
     <!-- add your kitten file here! -->
+
+    <iframe id="frame" src="inner-frame.html" height="1" width="1"></iframe>
 </body>
 
 </html>

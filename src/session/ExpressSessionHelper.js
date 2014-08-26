@@ -6,12 +6,8 @@ var cookieName = "_gib_session";
 var ExpressSessionHelper = (function() {
     function ExpressSessionHelper(usersDao) {
         this.usersDao = usersDao;
-    }
+     }
 
-    /**
-     * @param [Request] req
-     * @param [Response] res
-     */
     ExpressSessionHelper.prototype.getSessionData = function(req, res) {
         return session.getSessionData(getSessionId(req));
     };
@@ -37,6 +33,8 @@ var ExpressSessionHelper = (function() {
         setSessionCookie(res, null);
     }
 
+    // For more information about how to set cookies in express,
+    // checkout - http://expressjs.com/4x/api.html#res.cookie
     function setSessionCookie(res, sessionId) {
         res.cookie(cookieName, sessionId, {});
     }

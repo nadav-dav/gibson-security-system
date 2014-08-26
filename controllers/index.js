@@ -3,6 +3,7 @@
 
 var rek = require("rekuire");
 var expressSessionHelper = rek("beans").session.expressSessionHelper;
+var csrfTokenizer = rek("beans").tokenizer;
 
 module.exports = function(router) {
     router.get("/", function(req, res) {
@@ -53,10 +54,11 @@ module.exports = function(router) {
     }
 
     function getDebugScripts(req) {        
-        return req.param("debugscript") ? "<script type=\"text/javascript\" src=\"" + req.param("debugscript") + "\"></script>" : "<!-- debugscript -->";
+        return req.param("debugscript") ? "<script type=\"text/javascript\" src=\"" + req.param("debugscript") + "\"></script>" : "<!--  use query param 'debugscript' parameter to add a debug script -->";
     }
 
     function createCsrfToken (userId) {
+        // USE `csrfTokenizer.createTokenFor(userId)` to create the token and validate it later!
         return "to be completed";
     }
 

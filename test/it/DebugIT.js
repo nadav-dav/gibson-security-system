@@ -17,7 +17,7 @@ describe('Debug IT', function () {
         server.run([
             register(credentials),
             goTo("/wall"),
-            makeSure.responseBodyContains("<!-- debugscript -->"),
+            makeSure.responseBodyContains("<!--  use query param 'debugscript' parameter to add a debug script -->"),
             goTo("/wall?debugscript=/debug.js"),
             makeSure.responseBodyContains("<script type=\"text/javascript\" src=\"/debug.js\"></script>")
         ], done);
