@@ -1,4 +1,13 @@
 <script type="text/javascript">
+	// This string will be replaced with the user name
+	// using the Dust Template Engine.
+	// for more info: https://akdubya.github.io/dustjs/
+
+	// =================================================
+	// NOTICE: THIS CODE IS PROVIDED BY THE SERVER SIDE!
+	// =================================================
+	var userName = "{.user.name}";
+
 	$(function () {
 		var message = getParameterByName("message");
 		if (message) {
