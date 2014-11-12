@@ -12,15 +12,28 @@
 
 	$(function () {
 		var message = getParameterByName("message");
-		if (message) {
+		if (message) {			
 			$("#dropdownMenu").notify(message,{className: "success", position:"left"});	
 		}		
 	});
 
 	function getParameterByName(name) {
+		/**
+		When taking paramters from the url and injecting it into the page
+		we need to make sure it contains only what we expect!
+
+		With this regex we make sure to contain only accepted values:
+		message.replace(/[^a-zA-Z0-9\s\!]/g,"")
+		**/	
+
 	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
 	        results = regex.exec(location.search);
-	    return results == null ? false :  decodeURIComponent(results[1].replace(/\+/g, " "));
+	    if (results == null){
+	    	return false;
+    	}else {
+    		var message = decodeURIComponent(results[1].replace(/\+/g, " "));
+    		return message;
+    	} 
 	}
 </script>
