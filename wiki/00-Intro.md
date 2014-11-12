@@ -55,6 +55,7 @@ Choose which of your machines should run the **Gibson** app, and which should be
 You now have server running! Open it [here!](http://www.gibson-sec.com/)
 
 - - -
-Create users, and start posting messages!
+### Create users!
+and start posting messages!
 
 After you've posted some messages, you can go on and move to the [next step](01-Tools.md)
