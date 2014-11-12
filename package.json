@@ -23,7 +23,7 @@
     "lodash": "^2.4.1",
     "q": "^1.0.1",
     "randomcolor": "^0.1.1",
-    "rekuire": "^0.1.5",
+    "rekuire": "^0.1.7",
     "sqlite3": "^2.2.3"
   },
   "devDependencies": {
@@ -50,5 +50,8 @@
     "css": "less",
     "js": false,
     "task": "grunt"
+  },
+  "rekuire": {
+    "ignore": ["public"]
   }
 }
